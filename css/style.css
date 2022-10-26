@@ -99,9 +99,9 @@ th, td{
   }
 
   td{
-	border-right: 1px solid black;
-	border-bottom: 1px solid black;
-	border-left: 1px solid black;
+	border-right: 1px solid rgb(255, 255, 255);
+	border-bottom: 1px solid rgb(255, 255, 255);
+	border-left: 1px solid rgb(255, 255, 255);
 	vertical-align: center;
 	width: 250px;
   }
