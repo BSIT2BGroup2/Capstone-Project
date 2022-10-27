@@ -56,7 +56,7 @@
                                             <div class="row flight-type">
                                                 <div class="col-1">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="flight_type" id="flexRadioDefault1" value="return"onclick="document.getElementById('return_date').disabled = false;">
+                                                        <input class="form-check-input" type="radio" name="flight_type" id="flexRadioDefault1" value="return" onclick="document.getElementById('return_date').disabled = false;" checked>
                                                         <label class="form-label" for="flexRadioDefault1">
                                                           Return
                                                         </label>
@@ -117,18 +117,8 @@
                                             <div class="row rower2">
                                                 <div class="col">
                                                     <div class="form-group flight-type">
-                                                        <span class="form-label">Trip Type</span>
-                                                        <select class="form-control form-control-sm" name="travel_class">
-                                                            <option>Return</option>
-                                                            <option>One Way</option>
-                                                        </select>
-                                                        <span class="select-arrow"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-group flight-type">
                                                         <span class="form-label">Travel Class</span>
-                                                        <select class="form-control form-control-sm">
+                                                        <select class="form-control form-control-sm" name="travel_class">
                                                             <option>Economy class</option>
                                                             <option>Business class</option>
                                                             <option>First class</option>
@@ -156,7 +146,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group">
-                                                        <button class="form-control form-control-sm submit-btn btn" >Search</button>
+                                                        <button class="form-control form-control-sm submit-btn btn" type="submit" name="submit">Search</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -187,12 +177,12 @@
                         $adult = $_POST['adult'];
                         $child = $_POST['child'];
                         $infant = $_POST['infant'];
-                        $trip_type = $_POST['trip_type'];
+                        $flight_type = $_POST['flight_type'];
                         $travel_class = $_POST['travel_class'];
 
                         # Real Time Flight API
                         $queryString = http_build_query([
-                            'access_key' => 'ba2a100b516a5eeb4a93b4ce14e1ded6'
+                            'access_key' => 'aa0fd0c2bef4782274efcc297d8ddc8e'
                         ]);
                         
                         $ch = curl_init(sprintf('%s?%s', 'http://api.aviationstack.com/v1/flights', $queryString));
@@ -211,8 +201,7 @@
                         <h2>Flights Found</h2>
                         <form action="">
                             <div class="table-responsive">
-                                    <?php foreach($flights_data['data'] as $flights): 
-                                    if($flights['flight_status'] == 'scheduled'){
+                                    <?php foreach($flights_data['data'] as $flights):
                                         if ($flights['departure']['iata'] == $origin) {
                                             if($flights['arrival']['iata'] == $destination) {
                                                 ?>      
@@ -222,37 +211,43 @@
                                             <thead>
                                                 <tr>
                                                     <th>Departure</th>
-                                                    <th colspan="3"><?php echo $flights_data['flight_date']; ?></th>
+                                                    <th colspan="3" class="text-center"><?php echo $flights['flight_date']; ?></th>
                                                 </tr>
                                             </thead>    
                                             <tbody>
                                                 <td class="air text-break"><?php echo $flights['airline']['name']; ?></td>
-                                                <td class="text-right"><span class="text"><strong><?php echo $flights['departure']['iata']. ', ' .$flights['departure']['scheduled']; ?></strong></span><br><p><?php echo $flights['departure']['airport']; ?></p></td>
-                                                <td class="text-center"><?php echo $flights['departure']['scheduled']; ?></td>
-                                                <td class="text-left"><span class="text"><strong><?php echo $flights['arrival']['iata']. ', ' .$flights['arrival']['scheduled']; ?></strong></span><br><p><?php echo $flights['arrival']['airport']; ?></p></td>
-                                                
+                                                <div class="time">
+                                                    <td class="text-right"><span class="text"><strong><?php echo $flights['departure']['iata']. ', ' .$flights['departure']['scheduled']; ?></strong></span><br><p><?php echo $flights['departure']['airport']; ?></p></td>
+                                                    <td class="text-center"><?php echo $flights['departure']['scheduled']; ?></td>
+                                                    <td class="text-left"><span class="text"><strong><?php echo $flights['arrival']['iata']. ', ' .$flights['arrival']['scheduled']; ?></strong></span><br><p><?php echo $flights['arrival']['airport']; ?></p></td>
+                                                </div>
+                                                    <td>
+                                                        <div class="form-group">
+                                                            <button class="form-control form-control-sm submit-btn btn" >Book</button>
+                                                        </div></td>
                                             </tbody>
                                             <thead>
                                                 <tr>
-                                                    <th>Departure</th>
-                                                    <th colspan="3"><?php echo $flights_data['flight_date']; ?></th>
+                                                    <th>Return</th>
+                                                    <th colspan="3" class="text-center"><?php echo $flights['flight_date']; ?></th>
                                                 </tr>
                                             </thead>    
                                             <tbody>
                                                 <td class="air text-break"><?php echo $flights['airline']['name']; ?></td>
-                                                <td class="text-right"><span class="text"><strong><?php echo $flights['arrival']['iata']. ', ' .$flights['arrival']['scheduled']; ?></strong></span><br><p><?php echo $flights['arrival']['airport']; ?></p></td>
-                                                <td class="text-center"><?php echo $flights['departure']['scheduled']; ?></td>
-                                                <td class="text-left"><span class="text"><strong><?php echo $flights['departure']['iata']. ', ' .$flights['departure']['scheduled']; ?></strong></span><br><p><?php echo $flights['departure']['airport']; ?></p></td>
-                                                
+                                                <div class="time">
+                                                    <td class="text-right"><span class="text"><strong><?php echo $flights['arrival']['iata']. ', ' .$flights['arrival']['scheduled']; ?></strong></span><br><p><?php echo $flights['arrival']['airport']; ?></p></td>
+                                                    <td class="text-center"><?php echo $flights['departure']['scheduled']; ?></td>
+                                                    <td class="text-left"><span class="text"><strong><?php echo $flights['departure']['iata']. ', ' .$flights['departure']['scheduled']; ?></strong></span><br><p><?php echo $flights['departure']['airport']; ?></p></td>
+                                                </div>
                                             </tbody>
-                                        <?php
-                                    }
-                                }
-                            }
-                            endforeach; ?>
                                         </table>
                                     </div>
                                 </div>
+                                                        <?php
+                                                    }
+                                                }
+                                            
+                                            endforeach; ?>
                             </div>
                         </form>
                     </div>
