@@ -45,6 +45,21 @@
 	width: 300px;
 }
 
+.flight-type input{
+	margin: 0;
+	font: inherit;
+	width: 1.15em;
+	height: 1.15em;
+	border: 0.15em solid currentColor;
+	border-radius: 50%;
+}
+
+.flight-type label{
+	margin: 0;
+	padding-left: 20px;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
 datalist{
 	position: absolute;
 	background-color: white;
