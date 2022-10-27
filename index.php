@@ -163,7 +163,7 @@
                 if(!isset($_POST['submit'])){
             ?>
                 <main>
-                    <div class="container-fluid">
+                    <div class="container">
                         <h2>Flight Search</h2>
                         <p>To start search enter Flying from and Flying to destinations.</p>
                     </div>
@@ -197,7 +197,7 @@
                         $flights_data = json_decode($json, true);
                         
                     ?>
-                    <div class="container-fluid">
+                    <div class="container">
                         <h2>Flights Found</h2>
                         <form action="">
                             <div class="table-responsive">
