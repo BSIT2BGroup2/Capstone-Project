@@ -4,7 +4,7 @@ $queryString = http_build_query([
   'access_key' => 'aa0fd0c2bef4782274efcc297d8ddc8e'
 ]);
 
-$ch = curl_init(sprintf('%s?%s', 'http://api.aviationstack.com/v1/airlines', $queryString));
+$ch = curl_init(sprintf('%s?%s', 'http://api.aviationstack.com/v1/flights', $queryString));
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 $json = curl_exec($ch);
