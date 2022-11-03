@@ -134,9 +134,19 @@ thead, tbody{
 
 /* Form Style */
 
+
+aside {
+	width: 20%;
+	padding-left: 30px;
+	margin-left: 30px;
+	float: right;
+	color: #fff;
+	background-color:rgb(71, 133, 219);
+  }
+/*
 .passenger-form{
 	background-color: rgb(71, 133, 219);
-}
+} */
 
 .passenger-form .card {
 	margin-top: 10px;
