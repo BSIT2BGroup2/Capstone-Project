@@ -28,15 +28,8 @@
               <div class="card">
                 <img src="assets/img/naia.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Ninoy Aquino Internationa Airport</h5>
+                  <a href="airport_details.php"><h5 class="card-title">Ninoy Aquino Internationa Airport</h5></a>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-                <div class="card-footer">
-                <p class="card-text">
-                  <a href="#" class="btn btn-primary">View</a>
-                  <a href="#" class="btn btn-warning">Edit</a>
-                  <a href="#" class="btn btn-danger">Delete</a>
-               </p>
                 </div>
               </div>
             </div>
