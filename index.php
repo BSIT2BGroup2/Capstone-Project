@@ -82,7 +82,7 @@
                                                                 $airport = mysqli_query($con, "SELECT * FROM airports");
                                                                 while($row = mysqli_fetch_array($airport)):
                                                             ?>
-                                                                <option value="<?php echo $row['iata_code']; ?>"><?php echo $row['airport_name']. '-'. $row['country_name']; ?></option>
+                                                                <option value="<?php echo $row['iata_code']; ?>"><?php echo $row['airport_name']. ' - '. $row['city']; ?></option>
                                                             <?php endwhile; ?>
                                                         </datalist>
                                                     </div>
