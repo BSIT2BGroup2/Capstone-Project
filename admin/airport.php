@@ -7,7 +7,7 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Manage Airports <a href="add_airport.php" class="btn btn-primary">Add Airport</a> </h1>
+      <h1>Manage Airports <a href="add_airport.php" class="btn btn-primary"><i class="bi bi-plus"></i>Add Airport</a> </h1>
       <!--<nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>

@@ -7,7 +7,7 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Add Airports</h1>
+      <h1>Add Airline</h1>
       <!--<nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -24,8 +24,8 @@
               <form class="row g-3 needs-validation" novalidate>
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingName" placeholder="Airport Name" required>
-                    <label for="floatingName">Airport Name</label>
+                    <input type="text" class="form-control" id="floatingName" placeholder="Airline Name" required>
+                    <label for="floatingName">Airline Name</label>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -37,30 +37,13 @@
                 <div class="col-md-6">
                   <div class="col-md-12">
                     <div class="form-floating">
-                      <input type="text" class="form-control" id="floatingCity" placeholder="City" required>
-                      <label for="floatingCity">City</label>
+                      <input type="text" class="form-control" id="floatingCity" placeholder="ICAO" required>
+                      <label for="floatingCity">ICAO</label>
                     </div>
                   </div>
                 </div>
                 <div class="col-12">
-                  <div class="form-floating">
-                    <textarea class="form-control" placeholder="Address" id="floatingTextarea" style="height: 100px;" required></textarea>
-                    <label for="floatingTextarea">Address</label>
-                  </div>
-                </div>
-                
-                <div class="col-12">
-                  <label class="col-sm-2 col-form-label">Airlines</label>
-                    <div class="col-sm-12">
-                      <select class="form-select" multiple aria-label="multiple select example" required>
-                        <option disabled>Hold Crtl button to Select Multiple Airline</option>
-                        <option Value="0">Philippine Airline</option>
-                        <option value="1">Cebu Pacific</option>
-                      </select>
-                    </div>
-                </div>
-                <div class="col-12">
-                  <label for="inputNumber" class="col-sm-2 col-form-label">Airport Picture</label>
+                  <label for="inputNumber" class="col-sm-2 col-form-label">Airline Picture</label>
                     <div class="col-sm-12">
                       <input class="form-control" type="file" id="formFile">
                     </div>
