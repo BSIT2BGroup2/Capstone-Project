@@ -7,7 +7,7 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Manage Airports <a href="add_airport.php" class="btn btn-primary">Add Airport</a> </h1>
+      <h1>Manage Airlines <a href="#" class="btn btn-primary">Add Airline</a></h1>
       <!--<nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -25,9 +25,9 @@
           <div class="row">
             <div class="col-lg-3">
               <div class="card">
-                <img src="assets/img/naia.jpg" class="card-img-top" alt="...">
+                <img src="assets/img/pal.png" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <a href="airport_details.php"><h5 class="card-title">Ninoy Aquino Internationa Airport</h5></a>
+                  <a href="airline_details.php"><h5 class="card-title">Philipine Airline</h5></a>
                 </div>
               </div>
             </div>

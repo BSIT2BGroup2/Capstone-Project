@@ -7,7 +7,7 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Users Tables</h1>
+      <h1>Manage Students</h1>
       <!--<nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -22,7 +22,6 @@
       <div class="row align-items-top">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Manage Airports <a href="#" class="btn btn-primary">Add Airport</a></h5>
           </div>
           <div class="row">
             <div class="col-lg-6">

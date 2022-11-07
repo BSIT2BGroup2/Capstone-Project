@@ -20,6 +20,13 @@
       </li><!-- End Contact Page Nav -->
 
       <li class="nav-item">
+        <a class="nav-link collapsed" href="airline.php">
+          <i class="bi bi-airplane"></i>
+          <span>Airlines</span>
+        </a>
+      </li><!-- End Contact Page Nav -->
+
+      <li class="nav-item">
         <a class="nav-link collapsed" href="student.php">
           <i class="bi bi-person"></i>
           <span>Manage Users</span>
