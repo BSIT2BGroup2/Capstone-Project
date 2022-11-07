@@ -1,5 +1,11 @@
 <?php 
     include('database/dbcon.php');
+
+    $month = date('m');
+$day = date('d');
+$year = date('Y');
+
+$today = $year . '-' . $month . '-' . $day;
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +82,7 @@
                                                 <div class="col columns">
                                                     <div class="form-group flight">
                                                         <span class="form-label">Flying from</span>
-                                                        <input class="form-control form-control-sm" list="location" id="input" name="origin">
+                                                        <input class="form-control form-control-sm" list="location" id="input" name="origin" required>
                                                         <datalist id="location">
                                                             <?php 
                                                                 $airport = mysqli_query($con, "SELECT * FROM airports");
@@ -90,7 +96,7 @@
                                                 <div class="col columns">
                                                     <div class="form-group flight">
                                                         <span class="form-label">Flyning to</span>
-                                                        <input class="form-control form-control-sm" list="location" id="input" name="destination">
+                                                        <input class="form-control form-control-sm" list="location" id="input" name="destination" required>
                                                         <datalist id="location">
                                                             <?php 
                                                                 $airport = mysqli_query($con, "SELECT * FROM airports");
@@ -104,13 +110,13 @@
                                                 <div class="col columns">
                                                     <div class="form-group dates">
                                                         <span class="form-label">Departing</span>
-                                                        <input class="form-control form-control-sm" type="date" name="departing_date">
+                                                        <input class="form-control form-control-sm" type="date" name="departing_date" value="<?php echo $today; ?>" required>
                                                     </div>
                                                 </div>
                                                 <div class="col columns dates">
                                                     <div class="form-group">
                                                         <span class="form-label">Returning</span>
-                                                        <input class="form-control form-control-sm" type="date" name="return_date">
+                                                        <input class="form-control form-control-sm" type="date" name="return_date" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -118,7 +124,7 @@
                                                 <div class="col">
                                                     <div class="form-group flight-type">
                                                         <span class="form-label">Travel Class</span>
-                                                        <select class="form-control form-control-sm" name="travel_class">
+                                                        <select class="form-control form-control-sm" name="travel_class" required>
                                                             <option>Economy class</option>
                                                             <option>Business class</option>
                                                             <option>First class</option>
@@ -129,7 +135,7 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <span class="form-label">Adults <sub> (18+ years old)</sub></span>
-                                                        <input class="form-control form-control-sm" type="number" name="adult" placeholder="1" min="1" value="1">
+                                                        <input class="form-control form-control-sm" type="number" name="adult" placeholder="1" min="1" value="1" required>
                                                     </div>
                                                 </div>
                                                 <div class="col">
@@ -180,74 +186,49 @@
                         $flight_type = $_POST['flight_type'];
                         $travel_class = $_POST['travel_class'];
 
-                        # Real Time Flight API
-                        $queryString = http_build_query([
-                            'access_key' => 'aa0fd0c2bef4782274efcc297d8ddc8e'
-                        ]);
-                        
-                        $ch = curl_init(sprintf('%s?%s', 'http://api.aviationstack.com/v1/flights', $queryString));
-                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                        
-                        $json = curl_exec($ch);
-                        
-                        #print($json);
-                        
-                        curl_close($ch);
-                        
-                        $flights_data = json_decode($json, true);
-                        
                     ?>
                     <div class="container">
                         <h2>Flights Found</h2>
-                        <form action="">
+                        <form action="form.php">
                             <div class="table-responsive">
-                                    <?php foreach($flights_data['data'] as $flights):
-                                        if ($flights['departure']['iata'] == $origin) {
-                                            if($flights['arrival']['iata'] == $destination) {
-                                                ?>      
                                 <div class="card">
                                     <div class="card-body">
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th>Departure</th>
-                                                    <th colspan="3" class="text-center"><?php echo $flights['flight_date']; ?></th>
-                                                </tr>
-                                            </thead>    
-                                            <tbody>
-                                                <td class="air text-break"><?php echo $flights['airline']['name']; ?></td>
-                                                <div class="time">
-                                                    <td class="text-right"><span class="text"><strong><?php echo $flights['departure']['iata']. ', ' .$flights['departure']['scheduled']; ?></strong></span><br><p><?php echo $flights['departure']['airport']; ?></p></td>
-                                                    <td class="text-center"><?php echo $flights['departure']['scheduled']; ?></td>
-                                                    <td class="text-left"><span class="text"><strong><?php echo $flights['arrival']['iata']. ', ' .$flights['arrival']['scheduled']; ?></strong></span><br><p><?php echo $flights['arrival']['airport']; ?></p></td>
-                                                </div>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <button class="form-control form-control-sm submit-btn btn" >Book</button>
-                                                        </div></td>
-                                            </tbody>
-                                            <thead>
-                                                <tr>
-                                                    <th>Return</th>
-                                                    <th colspan="3" class="text-center"><?php echo $flights['flight_date']; ?></th>
-                                                </tr>
-                                            </thead>    
-                                            <tbody>
-                                                <td class="air text-break"><?php echo $flights['airline']['name']; ?></td>
-                                                <div class="time">
-                                                    <td class="text-right"><span class="text"><strong><?php echo $flights['arrival']['iata']. ', ' .$flights['arrival']['scheduled']; ?></strong></span><br><p><?php echo $flights['arrival']['airport']; ?></p></td>
-                                                    <td class="text-center"><?php echo $flights['departure']['scheduled']; ?></td>
-                                                    <td class="text-left"><span class="text"><strong><?php echo $flights['departure']['iata']. ', ' .$flights['departure']['scheduled']; ?></strong></span><br><p><?php echo $flights['departure']['airport']; ?></p></td>
-                                                </div>
-                                            </tbody>
-                                        </table>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Departure</th>
+                                                        <th colspan="3" class="text-center"><?php echo $departing_date; ?></th>
+                                                    </tr>
+                                                </thead>    
+                                                <tbody>
+                                                    <td class="air text-break">Philippine Airline</td>
+                                                    <div class="time">
+                                                        <td class="text-right"><span class="text"><strong><?php echo $origin. ', 10:00'; ?></strong></span><br><p><?php echo $origin; ?></p></td>
+                                                        <td class="text-center"><?php echo '1h30m'; ?></td>
+                                                        <td class="text-left"><span class="text"><strong><?php echo $destination. ', 11:30'; ?></strong></span><br><p><?php echo $destination; ?></p></td>
+                                                    </div>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <button class="form-control form-control-sm submit-btn btn" type="submit" name="book">Book</button>
+                                                            </div></td>
+                                                </tbody>
+                                                <!-- <thead>
+                                                    <tr>
+                                                        <th>Return</th>
+                                                        <th colspan="3" class="text-center"><?php echo $return_date; ?></th>
+                                                    </tr>
+                                                </thead>    
+                                                <tbody>
+                                                    <td class="air text-break"><?php echo $flights['airline']['name']; ?></td>
+                                                    <div class="time">
+                                                        <td class="text-right"><span class="text"><strong><?php #echo $flights['arrival']['iata']. ', ' .$flights['arrival']['scheduled']; ?></strong></span><br><p><?php #echo $flights['arrival']['airport']; ?></p></td>
+                                                        <td class="text-center"><?php #echo $flights['departure']['scheduled']; ?></td>
+                                                        <td class="text-left"><span class="text"><strong><?php #echo $flights['departure']['iata']. ', ' .$flights['departure']['scheduled']; ?></strong></span><br><p><?php #echo $flights['departure']['airport']; ?></p></td>
+                                                    </div>
+                                                </tbody> -->
+                                            </table>
                                     </div>
                                 </div>
-                                                        <?php
-                                                    }
-                                                }
-                                            
-                                            endforeach; ?>
                             </div>
                         </form>
                     </div>
