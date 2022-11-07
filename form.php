@@ -33,7 +33,7 @@
             <div id="content">
 
                 <!-- Navbar -->
-                <nav class="navbar navbar-light main-bar navbar-expand-lg sticky-top">
+                <nav class="navbar navbar-light main-bar navbar-expand-lg">
                     <div class="row">
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                             <i class="fa fa-bars"></i>
@@ -44,8 +44,8 @@
                     </div>
                 </nav>
                 <!-- Navbar End-->
-
-                <aside>
+                <aside class="book-info">
+                    <br>
                     <h4>Your Booking</h4>
                     <div>
                         <h6>1 Travaler<p>1 Adult</p></h6>
