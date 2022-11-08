@@ -2,6 +2,7 @@
     include ('includes/header.php');
     include ('includes/navbar.php');
     include ('includes/sidebar.php');
+    include ('../database/dbcon.php');
 ?>
 
 <main id="main" class="main">
@@ -23,14 +24,23 @@
           <div class="card-body">
           </div>
           <div class="row">
+            <?php 
+              $airline = mysqli_query($con, "SELECT * FROM airlines");
+              while($row = mysqli_fetch_array($airline)):
+            ?>
             <div class="col-lg-3">
               <div class="card">
-                <img src="assets/img/pal.png" class="card-img-top" alt="...">
+                <?php if($row['airline_img'] != null):?>
+                  <img src="assets/img/pal.png" class="card-img-top" alt="...">
+                  <?php else:?>
+                    <img src="assets/img/no-img.jpg" class="card-img-top" alt="...">
+                  <?php endif;?>
                 <div class="card-body">
-                  <a href="airline_details.php"><h5 class="card-title">Philipine Airline</h5></a>
+                  <a href="airline_details.php"><h5 class="card-title"><?php echo $row['airline_name'];?></h5></a>
                 </div>
               </div>
             </div>
+            <?php endwhile; ?>
           </div>
         </div>
       </div>
