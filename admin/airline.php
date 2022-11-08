@@ -31,12 +31,18 @@
             <div class="col-lg-3">
               <div class="card">
                 <?php if($row['airline_img'] != null):?>
-                  <img src="assets/img/pal.png" class="card-img-top" alt="...">
-                  <?php else:?>
-                    <img src="assets/img/no-img.jpg" class="card-img-top" alt="...">
-                  <?php endif;?>
+                  <img src="assets/img/<?php echo $row['airline_img']; ?>" class="card-img-top" alt="...">
+                <?php else:?>
+                  <img src="assets/img/no-img.jpg" class="card-img-top" alt="...">
+                <?php endif;?>
                 <div class="card-body">
-                  <a href="airline_details.php"><h5 class="card-title"><?php echo $row['airline_name'];?></h5></a>
+                  <a href="airline_details.php<?php echo '?airline_id='.$row['airline_id'];?>"><h5 class="card-title"><?php echo $row['airline_name'];?></h5></a>
+                </div>
+                <div class="card-footer">
+                  <p class="card-text">
+                    <a href="#" class="btn btn-warning"><i class="bi bi-pencil-square"></i>Edit</a>
+                    <a href="#" class="btn btn-danger"><i class="bi bi-trash"></i>Delete</a>
+                  </p>
                 </div>
               </div>
             </div>

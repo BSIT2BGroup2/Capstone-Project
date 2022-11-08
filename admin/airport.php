@@ -25,18 +25,24 @@
           </div>
           <div class="row">
             <?php 
-              $airline = mysqli_query($con, "SELECT * FROM airports");
-              while($row = mysqli_fetch_array($airline)):
+              $airport = mysqli_query($con, "SELECT * FROM airports");
+              while($row = mysqli_fetch_array($airport)):
             ?>
             <div class="col-lg-3">
               <div class="card">
                 <?php if($row['airport_img'] != null):?>
-                  <img src="assets/img/pal.png" class="card-img-top" alt="...">
+                  <img src="assets/img/<?php echo $row['airport_img']; ?>" class="card-img-top" alt="...">
                   <?php else:?>
                     <img src="assets/img/no-img.jpg" class="card-img-top" alt="...">
                   <?php endif;?>
                 <div class="card-body">
-                  <a href="airport_details.php"><h5 class="card-title"><?php echo $row['airport_name'];?></h5></a>
+                  <a href="airport_details.php<?php echo '?airport_id='.$row['airport_id'];?>"><h5 class="card-title"><?php echo $row['airport_name'];?></h5></a>
+                </div>
+                <div class="card-footer">
+                  <p class="card-text">
+                    <a href="#" class="btn btn-warning"><i class="bi bi-pencil-square"></i>Edit</a>
+                    <a href="#" class="btn btn-danger"><i class="bi bi-trash"></i>Delete</a>
+                  </p>
                 </div>
               </div>
             </div>

@@ -2,6 +2,12 @@
     include ('includes/header.php');
     include ('includes/navbar.php');
     include ('includes/sidebar.php');
+    include ('../database/dbcon.php');
+
+    $id = $_GET['airport_id'];
+
+    $airport = mysqli_query($con, "SELECT * FROM airports WHERE airport_id = '$id'");
+    $row = mysqli_fetch_array($airport);
 ?>
 <style>
     .airport-pic{
@@ -13,10 +19,13 @@
 
     <section class="section">
         <div class="row align-items-top">
-            <img src="assets/img/naia.jpg" class="card-img-top airport-pic" alt="..." style="width: 50%;">
-            
+            <?php if($row['airport_img'] != null):?>
+                <img src="assets/img/<?php echo $row['airline_img'] ?>" class="card-img-top airport-pic" alt="..." style="width: 50%;">
+            <?php else: ?>
+                <img src="assets/img/no-img.jpg" class="card-img-top airport-pic" alt="..." style="width: 50%;">
+            <?php endif; ?>
             <div class="card-body">
-                <h5 class="card-title">Ninoy Aquino Internationa Airport</h5>
+                <h5 class="card-title"><?php echo $row['airport_name'];?></h5>
                 <p class="card-text">Ninoy Aquino International Airport or NAIA (IATA: MNL, ICAO: RPLL), also known as Manila International Airport or 
                                     simply Manila Airport, is one of the two international airports serving the Metro Manila Area and the main 
                                     international gateway to the Philippines.<br>
