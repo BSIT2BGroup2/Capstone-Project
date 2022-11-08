@@ -1,11 +1,16 @@
-
+<?php 
+  include ('database/dbcon.php');
+  include ('session.php');
+  $user = mysqli_query($con, "SELECT * FROM users WHERE user_id='$id'");
+  $row = mysqli_fetch_array($user);
+?>
 <body>
     <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
-        <span class="d-none d-lg-block">Admin | Dashboard</span>
+      <a href="dashboard.php" class="logo d-flex align-items-center">
+        <span class="d-none d-lg-block">Dashboard</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -23,12 +28,12 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/no-profile.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">Clive Saludes</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $row['name']?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Clive Saludes</h6>
+              <h6><?php echo $row['name']?></h6>
               <!-- <span>Web Designer</span> -->
             </li>
             <li>
@@ -46,7 +51,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="logout.php">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>

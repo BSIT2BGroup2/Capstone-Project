@@ -70,7 +70,7 @@
 
 <?php
     include ('includes/footer.php');
-    include ('../database/dbcon.php');
+    include ('database/dbcon.php');
     if(isset($_POST['submit'])){
       $airline_name = $_POST['airline_name'];
       $iata_code = $_POST['iata_code'];

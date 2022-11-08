@@ -2,7 +2,7 @@
     include ('includes/header.php');
     include ('includes/navbar.php');
     include ('includes/sidebar.php');
-    include ('../database/dbcon.php');
+    include ('database/dbcon.php');
 
     $id = $_GET['airline_id'];
 
