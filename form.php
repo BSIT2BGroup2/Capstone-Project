@@ -76,14 +76,15 @@
                             Total Duration 01h30m <br>
                             Fare Type: <?php echo $travel_class; ?></p>
                     </div>
+                    <?php if($return_date != null): ?>
                     <div>
-                        
                         <p><?php echo $return_date; ?><br>
                             <strong>20:30</strong> <?php echo $destination; ?><br>
                             <strong>22:00</strong> <?php echo $origin; ?><br>
                             Total Duration 01h30m <br>
                             Fare Type: <?php echo $travel_class; ?></p>
                     </div>
+                    <?php endif; ?>
                 </aside>
                 
                 <main  class="passenger-form">

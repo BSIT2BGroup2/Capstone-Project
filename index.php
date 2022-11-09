@@ -62,7 +62,7 @@ $today = $year . '-' . $month . '-' . $day;
                                             <div class="row flight-type">
                                                 <div class="col-1">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="flight_type" id="flexRadioDefault1" value="return" onclick="document.getElementById('return_date').disabled = false;" checked>
+                                                        <input class="form-check-input" type="radio" name="flight_type" id="flexRadioDefault1" value="return" onclick="document.getElementById('return_date').hidden = false; document.getElementById('return_date_label').style.display = 'initial';" checked>
                                                         <label class="form-label" for="flexRadioDefault1">
                                                           Return
                                                         </label>
@@ -71,7 +71,7 @@ $today = $year . '-' . $month . '-' . $day;
                                                 <div class="col-2">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio" name="flight_type" id="flexRadioDefault1" value="one_way" 
-                                                        onclick="document.getElementById('return_date').disabled = true;">
+                                                        onclick="document.getElementById('return_date').hidden = true; document.getElementById('return_date_label').style.display = 'none';">
                                                         <label class="form-label" for="flexRadioDefault1">
                                                         One-Way
                                                         </label>
@@ -115,8 +115,8 @@ $today = $year . '-' . $month . '-' . $day;
                                                 </div>
                                                 <div class="col columns dates">
                                                     <div class="form-group">
-                                                        <span class="form-label">Returning</span>
-                                                        <input class="form-control form-control-sm" type="date" name="return_date" id="return_date" required>
+                                                        <span class="form-label" id="return_date_label">Returning</span>
+                                                        <input class="form-control form-control-sm" type="date" name="return_date" id="return_date">
                                                     </div>
                                                 </div>
                                             </div>
