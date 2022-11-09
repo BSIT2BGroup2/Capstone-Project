@@ -116,7 +116,7 @@ $today = $year . '-' . $month . '-' . $day;
                                                 <div class="col columns dates">
                                                     <div class="form-group">
                                                         <span class="form-label">Returning</span>
-                                                        <input class="form-control form-control-sm" type="date" name="return_date" required>
+                                                        <input class="form-control form-control-sm" type="date" name="return_date" id="return_date" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -141,13 +141,13 @@ $today = $year . '-' . $month . '-' . $day;
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <span class="form-label">Children <sub>(2 - 12 years old)</sub></span>
-                                                        <input class="form-control form-control-sm" type="number" name="child" placeholder="0" min="0">
+                                                        <input class="form-control form-control-sm" type="number" name="child" placeholder="0" min="0" value="0">
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <span class="form-label">Infant <sub>(2 - 12 months)</sub></span>
-                                                        <input class="form-control form-control-sm" type="number" name="infant" placeholder="0" min="0">
+                                                        <input class="form-control form-control-sm" type="number" name="infant" placeholder="0" min="0" value="0">
                                                     </div>
                                                 </div>
                                                 <div class="col">
@@ -189,10 +189,19 @@ $today = $year . '-' . $month . '-' . $day;
                     ?>
                     <div class="container">
                         <h2>Flights Found</h2>
-                        <form action="form.php">
+                        <form action="form.php" method="POST">
                             <div class="table-responsive">
                                 <div class="card">
                                     <div class="card-body">
+                                        <input type="text" name="origin" value="<?php echo $origin;?>" hidden>
+                                        <input type="text" name="destination" value="<?php echo $destination;?>" hidden>
+                                        <input type="date" name="departing_date" value="<?php echo $departing_date;?>" hidden>
+                                        <input type="date" name="return_date" value="<?php echo $return_date;?>" hidden>
+                                        <input type="number" name="adult" value="<?php echo $adult;?>" hidden>
+                                        <input type="number" name="child" value="<?php echo $child;?>" hidden>
+                                        <input type="number" name="infant" value="<?php echo $infant;?>" hidden>
+                                        <input type="text" name="flight_type" value="<?php echo $flight_type;?>" hidden>
+                                        <input type="text" name="travel_class" value="<?php echo $travel_class;?>" hidden>
                                             <table>
                                                 <thead>
                                                     <tr>
@@ -212,20 +221,23 @@ $today = $year . '-' . $month . '-' . $day;
                                                                 <button class="form-control form-control-sm submit-btn btn" type="submit" name="book">Book</button>
                                                             </div></td>
                                                 </tbody>
-                                                <!-- <thead>
+                                                <?php if($return_date != null): 
+                                                ?>
+                                                <thead>
                                                     <tr>
                                                         <th>Return</th>
                                                         <th colspan="3" class="text-center"><?php echo $return_date; ?></th>
                                                     </tr>
                                                 </thead>    
                                                 <tbody>
-                                                    <td class="air text-break"><?php echo $flights['airline']['name']; ?></td>
+                                                    <td class="air text-break">Philippine Airline</td>
                                                     <div class="time">
-                                                        <td class="text-right"><span class="text"><strong><?php #echo $flights['arrival']['iata']. ', ' .$flights['arrival']['scheduled']; ?></strong></span><br><p><?php #echo $flights['arrival']['airport']; ?></p></td>
-                                                        <td class="text-center"><?php #echo $flights['departure']['scheduled']; ?></td>
-                                                        <td class="text-left"><span class="text"><strong><?php #echo $flights['departure']['iata']. ', ' .$flights['departure']['scheduled']; ?></strong></span><br><p><?php #echo $flights['departure']['airport']; ?></p></td>
+                                                        <td class="text-right"><span class="text"><strong><?php echo $destination. ', 13:30'; ?></strong></span><br><p><?php echo $destination; ?></p></p></td>
+                                                        <td class="text-center"><?php echo '1h30m'; ?></td>
+                                                        <td class="text-left"><span class="text"><strong><strong><?php echo $origin. ', 14:00'; ?></strong></span><br><p><?php echo $origin; ?></p></td>
                                                     </div>
-                                                </tbody> -->
+                                                </tbody>
+                                                <?php endif; ?>
                                             </table>
                                     </div>
                                 </div>

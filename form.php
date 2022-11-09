@@ -43,28 +43,46 @@
                         </span>
                     </div>
                 </nav>
+
+    <?php 
+        if(isset($_POST['book'])):
+            $origin = $_POST['origin'];
+            $destination = $_POST['destination'];
+            $departing_date = $_POST['departing_date'];
+            $return_date = $_POST['return_date'];
+            $adult = intval($_POST['adult']);
+            $child = intval($_POST['child']);
+            $infant = intval($_POST['infant']);
+            $flight_type = $_POST['flight_type'];
+            $travel_class = $_POST['travel_class'];
+            $passenger = $adult + $child + $infant;
+    
+    ?>
+
                 <!-- Navbar End-->
                 <aside class="book-info">
                     <br>
                     <h4>Your Booking</h4>
                     <div>
-                        <h6>1 Travaler<p>1 Adult</p></h6>
-                        
+                        <h6><?php echo $passenger; ?> Travaler<p><?php echo $adult;?> Adult 
+                        <?php if($child != null){ echo ', '.$child.' Child'; }?>
+                        <?php if($infant != null){ echo ', '.$infant.' Infant'; }?></p>
+                        </h6>
                     </div>
                     <div>
-                        <p>Wed 23 Nov 2022 <br>
-                            <strong>10:00</strong> Manila (MNL) <br>
-                            <strong>11:30</strong> Palawan (PPS) <br>
+                        <p><?php echo $departing_date; ?><br>
+                            <strong>10:00</strong> <?php echo $origin; ?> <br>
+                            <strong>11:30</strong> <?php echo $destination; ?><br>
                             Total Duration 01h30m <br>
-                            Fare Type: Economy</p>
+                            Fare Type: <?php echo $travel_class; ?></p>
                     </div>
                     <div>
                         
-                        <p>Sat 26 Nov 2022 <br>
-                            <strong>20:30</strong> Palawan (PPS) <br>
-                            <strong>22:00</strong> Manila (MNL) <br>
+                        <p><?php echo $return_date; ?><br>
+                            <strong>20:30</strong> <?php echo $destination; ?><br>
+                            <strong>22:00</strong> <?php echo $origin; ?><br>
                             Total Duration 01h30m <br>
-                            Fare Type: Economy</p>
+                            Fare Type: <?php echo $travel_class; ?></p>
                     </div>
                 </aside>
                 
@@ -77,9 +95,13 @@
                                     <!-- Adult Passenger Form-->
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Adult Passenger 1</h5>
+                                            <h4>Adult</h4>
                                         </div>
+                                        <?php for ($i=1; $i <= $adult; $i++):?>
                                         <div class="card-body">
+                                            <div class="card-header">
+                                                <h5>Passenger <?php echo $i; ?></h5>
+                                            </div>
                                             <div class="card-title">
                                                 <p>Personal Information</p>
                                             </div>
@@ -129,14 +151,20 @@
                                                 </div>
                                             </div> -->
                                         </div>
+                                        <?php endfor; ?>
                                     </div>
 
+                                    <?php if($child != null):?>
                                     <!-- Child Passenger Form-->
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Child Passenger 1</h5>
+                                            <h4>Child</h4>
                                         </div>
+                                        <?php for ($i=1; $i <= $child; $i++):?>
                                         <div class="card-body">
+                                            <div class="card-header">
+                                                <h5>Passenger <?php echo $i; ?></h5>
+                                            </div>
                                             <div class="card-title">
                                                 <p>Personal Information</p>
                                             </div>
@@ -165,14 +193,24 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <?php endfor; ?>
                                     </div>
+                                    <?php endif; ?>
 
+                                    <?php if($infant != null):?>
                                     <!-- Infant Passenger Form-->
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Infant Passenger 1</h5>
+                                            <h5>Infant</h5>
                                         </div>
+                                        <?php for ($i=1; $i <= $infant; $i++):?>
                                         <div class="card-body">
+                                            <div class="card-header">
+                                                <h5>Passenger <?php echo $i; ?></h5>
+                                            </div>
+                                            <div class="card-title">
+                                                <p>Personal Information</p>
+                                            </div>
                                             <div class="row">
                                                 <div class="form-group">
                                                     <span class="form-label">First/Given Name</span>
@@ -190,7 +228,9 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <?php endfor; ?>
                                     </div>
+                                    <?php endif; ?>
 
                                     <!-- Conformation -->
                                     <div class="card">
@@ -234,6 +274,7 @@
                         </div>
                     </div>
                 </main>
+                <?php endif; ?>
 
             </div>
         </div>
