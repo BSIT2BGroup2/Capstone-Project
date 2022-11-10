@@ -40,7 +40,7 @@
                 </div>
                 <div class="card-footer">
                   <p class="card-text">
-                    <a href="#" class="btn btn-warning"><i class="bi bi-pencil-square"></i>Edit</a>
+                    <a href="edit_airline.php<?php echo '?airline_id='.$row['airline_id'];?>" class="btn btn-warning"><i class="bi bi-pencil-square"></i>Edit</a>
                     <a href="#" class="btn btn-danger"><i class="bi bi-trash"></i>Delete</a>
                   </p>
                 </div>

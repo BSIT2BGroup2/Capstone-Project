@@ -26,10 +26,7 @@
             <?php endif; ?>
             <div class="card-body">
                 <h5 class="card-title"><?php echo $row['airline_name']; ?></h5>
-                <p class="card-text">Philippine Airlines (PAL), a trade name of PAL Holdings, Inc. (PSE: PAL) and also known historically 
-                                        as Philippine Air Lines until 1970, is the flag carrier of the Philippines. Headquartered at the 
-                                        PNB Financial Center in Pasay, the airline was founded in 1941 and is the first and oldest commercial 
-                                        airline in Asia operating under its original name.</p>
+                <p class="card-text"><?php echo $row['airline_description']; ?></p>
             </div>
             <!-- <div class="card-footer">
                 <div class="card">

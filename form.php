@@ -83,8 +83,8 @@
                     <?php if($return_date != null): ?>
                     <div>
                         <p><?php echo $return_date; ?><br>
-                            <strong>20:30</strong> <?php echo $dest['city']. " (" . $destination .")" ;?><br>
-                            <strong>22:00</strong> <?php echo $ori['city']. " (" . $origin .")" ;?><br>
+                            <strong>13:30</strong> <?php echo $dest['city']. " (" . $destination .")" ;?><br>
+                            <strong>14:00</strong> <?php echo $ori['city']. " (" . $origin .")" ;?><br>
                             Total Duration 01h30m <br>
                             Fare Type: <?php echo $travel_class; ?></p>
                     </div>

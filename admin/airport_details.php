@@ -26,13 +26,7 @@
             <?php endif; ?>
             <div class="card-body">
                 <h5 class="card-title"><?php echo $row['airport_name'];?></h5>
-                <p class="card-text">Ninoy Aquino International Airport or NAIA (IATA: MNL, ICAO: RPLL), also known as Manila International Airport or 
-                                    simply Manila Airport, is one of the two international airports serving the Metro Manila Area and the main 
-                                    international gateway to the Philippines.<br>
-                                    It is named after Senator Benigno "Ninoy" Aquino Jr., who was murdered at the airport in 1983. NAIA is located 
-                                    along the border between Pasay and Parañaque cities in Metro Manila, about 7 km (3.4 miles) south of the city 
-                                    and southwest of Makati Central Business District. MNL Airport is a hub for Cebu Pacific, Cebgo, Philippine Airlines, 
-                                    PAL Express and a focus city for Philippines AirAsia.</p>
+                <p class="card-text"><?php echo $row['airport_description'] ?></p>
             </div>
             <div class="card-footer">
                 <div class="card">
