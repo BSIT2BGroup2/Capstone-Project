@@ -45,6 +45,7 @@
                 </nav>
 
     <?php 
+        include ('admin/database/dbcon.php');
         if(isset($_POST['book'])):
             $origin = $_POST['origin'];
             $destination = $_POST['destination'];
@@ -56,6 +57,9 @@
             $flight_type = $_POST['flight_type'];
             $travel_class = $_POST['travel_class'];
             $passenger = $adult + $child + $infant;
+
+            $ori = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM airports WHERE iata_code ='$origin'"));
+            $dest = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM airports WHERE iata_code ='$destination'"));
     
     ?>
 
@@ -71,16 +75,16 @@
                     </div>
                     <div>
                         <p><?php echo $departing_date; ?><br>
-                            <strong>10:00</strong> <?php echo $origin; ?> <br>
-                            <strong>11:30</strong> <?php echo $destination; ?><br>
+                            <strong>10:00</strong> <?php echo $ori['city']. " (" . $origin .")" ;?> <br>
+                            <strong>11:30</strong> <?php echo $dest['city']. " (" . $destination .")" ;?><br>
                             Total Duration 01h30m <br>
                             Fare Type: <?php echo $travel_class; ?></p>
                     </div>
                     <?php if($return_date != null): ?>
                     <div>
                         <p><?php echo $return_date; ?><br>
-                            <strong>20:30</strong> <?php echo $destination; ?><br>
-                            <strong>22:00</strong> <?php echo $origin; ?><br>
+                            <strong>20:30</strong> <?php echo $dest['city']. " (" . $destination .")" ;?><br>
+                            <strong>22:00</strong> <?php echo $ori['city']. " (" . $origin .")" ;?><br>
                             Total Duration 01h30m <br>
                             Fare Type: <?php echo $travel_class; ?></p>
                     </div>
