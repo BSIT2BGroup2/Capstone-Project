@@ -28,6 +28,27 @@
                 <h5 class="card-title"><?php echo $row['airport_name'];?></h5>
                 <p class="card-text"><?php echo $row['airport_description'] ?></p>
             </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Airport Details</h5>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-3 label ">Airport Name</div>
+                        <div class="col-lg-1 col-md-1 label ">:</div>
+                        <div class="col-lg-9 col-md-8"><?php echo $row['airport_name'];?></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-3 label ">IATA Code</div>
+                        <div class="col-lg-1 col-md-1 label ">:</div>
+                        <div class="col-lg-9 col-md-8"><?php echo $row['iata_code'];?></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2 col-md-3 label ">City</div>
+                        <div class="col-lg-1 col-md-1 label ">:</div>
+                        <div class="col-lg-9 col-md-8"><?php echo $row['city'];?></div>
+                    </div>
+                </div>
+            </div>
+
             <div class="card-footer">
                 <div class="card">
                     <div class="card-body">

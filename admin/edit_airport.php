@@ -27,7 +27,8 @@
       <div class="row align-items-top">
         <div class="card">
           <div class="row"><!-- Floating Labels Form -->
-              <form class="row g-3 needs-validation" novalidate action="" method="post">
+              <form class="row g-3 needs-validation" novalidate action="edit.php" method="post">
+                <input type="text" name="airport_id" value="<?php echo $row['airport_id']; ?>" hidden>
                 <div class="col-md-12">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="floatingName" name="airport_name" placeholder="Airport Name" value="<?php echo $row['airport_name']; ?>" required>
@@ -72,12 +73,12 @@
                 <div class="col-12">
                   <div class="form-group">
                       <label for="title" class="text-label">Description</label>
-                        <textarea class="form-control" placeholder="Description"  name="airport_description" style="height: 100px;" value="<?php echo $row['airport_description']; ?>" required></textarea>
+                        <textarea class="form-control" placeholder="Description"  name="airport_description" style="height: 100px;" value="<?php echo $row['airport_description']; ?>"></textarea>
                   </div>
                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary" name="submit">Submit</button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
+                  <a href="airport.php" class="btn btn-secondary"><i class="bi bi-pencil-square"></i>Cancel</a>
+                  <button type="submit" class="btn btn-primary" name="edit_airport" value="edit_airport">Submit</button>
                 </div>
               </form><!-- End floating Labels Form -->
           </div>
@@ -92,17 +93,5 @@
 
     
 
-    if(isset($_POST['submit'])){
-      $airport_name = $_POST['airport_name'];
-      $iata_code = $_POST['iata_code'];
-      $city = $_POST['city'];
-      $airport_description = $_POST['airport_description'];
-        #foreach($_POST['airlines'] as $value){
-        #  $airlines.= $value.", ";
-        #}
-      
-      mysqli_query($con, "UPDATE airports SET airport_name = '$airport_name', iata_code = '$iata_code', city = '$city', airport_description = '$airport_description'
-                             WHERE airport_id = '$id'");
-      echo "<script>alert('Airport successfully Updated!'); window.location='airport.php'</script>";
-    }
+    
 ?>

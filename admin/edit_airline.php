@@ -27,7 +27,8 @@
       <div class="row align-items-top">
         <div class="card">
           <div class="row"><!-- Floating Labels Form -->
-              <form class="row g-3 needs-validation" novalidate action="" method="post">
+              <form class="row g-3 needs-validation" novalidate action="edit.php" method="post">
+                <input type="text" name="airline_id" value="<?php echo $row['airline_id'];?>" hidden>
                 <div class="col-md-12">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="floatingName" name="airline_name" placeholder="Airline Name" value="<?php echo $row['airline_name'];?>" required>
@@ -59,13 +60,13 @@
                   <div class="form-group">
                       <label for="title" class="text-label">Description</label>
                       
-                        <textarea class="form-control" placeholder="Description"  name="airline_description" style="height: 100px;" value="<?php echo $row['airline_description'];?>" required></textarea>
+                        <textarea class="form-control" placeholder="Description"  name="airline_description" style="height: 100px;" value="<?php echo $row['airline_description'];?>"></textarea>
                       
                   </div>
                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary" name="submit">Submit</button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
+                  <a href="airline.php" class="btn btn-secondary"><i class="bi bi-pencil-square"></i>Cancel</a>
+                  <button type="submit" class="btn btn-primary" name="edit_airline" value="edit_airline">Submit</button>
                 </div>
               </form><!-- End floating Labels Form -->
           </div>
@@ -77,14 +78,4 @@
 
 <?php
     include ('includes/footer.php');
-    if(isset($_POST['submit'])){
-      $airline_name = $_POST['airline_name'];
-      $iata_code = $_POST['iata_code'];
-      $icao_code = $_POST['icao_code'];
-      $airline_description = mysqli_real_escape_string($con, $_POST['airline_description']) ; 
-
-      mysqli_query($con, "UPDATE airlines SET airline_name = '$airline_name', iata_code = '$iata_code', icao_code = '$icao_code', airline_description = '$airline_description'
-                            WHERE airline_id = '$id'");
-                        echo "<script>alert('Airline successfully updated!'); window.location='airline.php'</script>";
-    }
 ?>

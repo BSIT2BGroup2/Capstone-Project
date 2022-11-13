@@ -11,14 +11,51 @@
 
 <div class="pagetitle">
   <h1>Profile</h1>
-  <nav>
+  <!-- <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="index.html">Home</a></li>
       <li class="breadcrumb-item">Users</li>
       <li class="breadcrumb-item active">Profile</li>
     </ol>
-  </nav>
+  </nav> -->
 </div><!-- End Page Title -->
+
+  <?php
+      if(isset($_GET['msg'])){
+        if($_GET['msg'] == 'success'){
+          echo '
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-octagon me-1"></i>
+              The User Detail is been Updated
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }
+        if($_GET['msg'] == 'invalid_pass'){
+          echo '
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-octagon me-1"></i>
+              Old Password does not Match!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }
+        if($_GET['msg'] == 'invalid_pass_confirm'){
+          echo '
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-octagon me-1"></i>
+              New Password do not match to Confirm Password!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }
+        if($_GET['msg'] == 'success_pass'){
+          echo '
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-octagon me-1"></i>
+              The User Password is been Updated
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }
+      } 
+    ?>
 
 <section class="section profile">
   <div class="row">
@@ -48,6 +85,10 @@
 
             <li class="nav-item">
               <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+            </li>
+
+            <li class="nav-item">
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit-password">Edit Password</button>
             </li>
 
           </ul>
@@ -82,7 +123,11 @@
             <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
               <!-- Profile Edit Form -->
-              <form>
+              <form action="edit.php" method="post">
+
+                <input type="text" name="user_id" value="<?php echo $row['user_id']; ?>" hidden>
+
+                <!-- 
                 <div class="row mb-3">
                   <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                   <div class="col-md-8 col-lg-9">
@@ -92,7 +137,7 @@
                       <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
                     </div>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="row mb-3">
                   <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
@@ -111,7 +156,7 @@
                 <div class="row mb-3">
                   <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                   <div class="col-md-8 col-lg-9">
-                    <input name="phone" type="text" class="form-control" id="Phone" value="<?php echo $row['contact'];?>">
+                    <input name="contact" type="text" class="form-control" id="Phone" value="<?php echo $row['contact'];?>">
                   </div>
                 </div>
 
@@ -123,7 +168,43 @@
                 </div>
 
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Save Changes</button>
+                  <button type="submit" name="edit_profile" value="edit_profile" class="btn btn-primary">Save Changes</button>
+                </div>
+              </form><!-- End Profile Edit Form -->
+
+            </div>
+
+            <div class="tab-pane fade profile-edit-password pt-3" id="profile-edit-password">
+
+              <!-- Profile Edit Form -->
+              <form action="edit.php" method="post">
+
+                <input type="text" name="user_id" value="<?php echo $row['user_id']; ?>" hidden>
+                <input type="text" name="pass" value="<?php echo $row['password']; ?>" hidden>
+
+                <div class="row mb-3">
+                  <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Old Password</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="old_pass" type="password" class="form-control" id="fullName" value="">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="Address" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="new_pass" type="password" class="form-control" id="Address" value="">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Confirm New Password</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="confirm_pass" type="password" class="form-control" id="Phone" value="">
+                  </div>
+                </div>
+
+                <div class="text-center">
+                  <button type="submit" name="edit_password" value="edit_password" class="btn btn-primary">Edit Password</button>
                 </div>
               </form><!-- End Profile Edit Form -->
 
