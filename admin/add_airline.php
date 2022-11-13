@@ -21,7 +21,7 @@
       <div class="row align-items-top">
         <div class="card">
           <div class="row"><!-- Floating Labels Form -->
-              <form class="row g-3 needs-validation" novalidate action="" method="post">
+              <form class="row g-3 needs-validation" novalidate action="function/add.php" method="post">
                 <div class="col-md-12">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="floatingName" name="airline_name" placeholder="Airline Name" required>
@@ -57,7 +57,7 @@
                   </div>
                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                  <button type="submit" class="btn btn-primary" name="add_airline" value="add_airline">Submit</button>
                   <button type="reset" class="btn btn-secondary">Reset</button>
                 </div>
               </form><!-- End floating Labels Form -->
@@ -70,15 +70,4 @@
 
 <?php
     include ('includes/footer.php');
-    include ('database/dbcon.php');
-    if(isset($_POST['submit'])){
-      $airline_name = $_POST['airline_name'];
-      $iata_code = $_POST['iata_code'];
-      $icao_code = $_POST['icao_code'];
-      $airline_description = $_POST['airline_description']; 
-
-      mysqli_query($con, "INSERT INTO airlines (airline_name, iata_code, icao_code, airline_description)
-                        VALUES ('$airline_name','$iata_code','$icao_code','$airline_description')");
-                        echo "<script>alert('Airline successfully added!'); window.location='airline.php'</script>";
-    }
 ?>

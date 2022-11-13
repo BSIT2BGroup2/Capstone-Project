@@ -25,6 +25,30 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>';
         }
+        if($_GET['msg'] == 'no_img'){
+          echo '
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-octagon me-1"></i>
+              The Airport is been Added but no Image
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }
+        if($_GET['msg'] == 'img_success'){
+          echo '
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-octagon me-1"></i>
+              The Airport is been Added
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }
+        if($_GET['msg'] == 'img_err'){
+          echo '
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-octagon me-1"></i>
+              Error on Image
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }
       } 
         ?>
 
@@ -80,7 +104,7 @@
                       Are You Sure You Want to Delete this Airport (<?php echo $row['airport_name'];?>)
                     </div>
                     <div class="modal-footer">
-                      <form action="delete.php" method="post">
+                      <form action="function/delete.php" method="post">
                         <input type="text" name="airport_id" value="<?php echo $row['airport_id'];?>" hidden>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" name="delete_airport" value="delete_airport" class="btn btn-danger">Delete</button>

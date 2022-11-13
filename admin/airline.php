@@ -81,7 +81,7 @@
                         Are You Sure You Want to Delete this Arline (<?php echo $row['airline_name'];?>)
                       </div>
                       <div class="modal-footer">
-                        <form action="delete.php" method="post">
+                        <form action="function/delete.php" method="post">
                           <input type="text" name="airline_id" value="<?php echo $row['airline_id'];?>" hidden>
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                           <button type="submit" name="delete_airline" value="delete_airline" class="btn btn-danger">Delete</button>

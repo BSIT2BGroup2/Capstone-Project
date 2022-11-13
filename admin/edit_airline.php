@@ -27,7 +27,7 @@
       <div class="row align-items-top">
         <div class="card">
           <div class="row"><!-- Floating Labels Form -->
-              <form class="row g-3 needs-validation" novalidate action="edit.php" method="post">
+              <form class="row g-3 needs-validation" novalidate action="function/edit.php" method="post">
                 <input type="text" name="airline_id" value="<?php echo $row['airline_id'];?>" hidden>
                 <div class="col-md-12">
                   <div class="form-floating">

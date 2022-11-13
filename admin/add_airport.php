@@ -22,7 +22,7 @@
       <div class="row align-items-top">
         <div class="card">
           <div class="row"><!-- Floating Labels Form -->
-              <form class="row g-3 needs-validation" novalidate action="" method="post">
+              <form class="row g-3 needs-validation" novalidate action="function/add.php" method="post">
                 <div class="col-md-12">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="floatingName" name="airport_name" placeholder="Airport Name" required>
@@ -43,27 +43,32 @@
                     </div>
                   </div>
                 </div>
-                <!-- 
-                <div class="col-12">
-                  <label class="col-sm-2 col-form-label">Airlines</label>
-                    <div class="col-sm-12">
-                      <select class="form-select" multiple aria-label="multiple select example"  name="airlines[]" required>
-                        <option disabled>Hold Crtl button to Select Multiple Airline</option>
-                        <?php 
-                          $airline = mysqli_query($con, "SELECT * FROM airlines");
-                          while ($row = mysqli_fetch_array($airline)):
-                        ?>
-                          <option Value="<?php echo $row['airline_id'];?>"><?php echo $row['airline_name']; ?></option>
-                        <?php  endwhile; ?>
-                      </select>
-                    </div>
-                </div>
                 <div class="col-12">
                   <label for="inputNumber" class="col-sm-2 col-form-label">Airport Picture</label>
                     <div class="col-sm-12">
                       <input class="form-control" type="file" name="image">
                     </div>
-                  </div>-->
+                </div>
+                <!--
+                <div class="col-md-12">
+                  <label class="col-sm-2 col-form-label">Airlines</label>
+                    <div class="col-md-4">
+                      <?php 
+                      
+                      $airline = mysqli_query($con, "SELECT * FROM airlines");
+                      while ($row = mysqli_fetch_array($airline)):
+                      ?>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="gridCheck1"  name="airline[]" value="<?php echo $row['airline_id'];?>">
+                          <label class="form-check-label" for="gridCheck1">
+                          <?php echo $row['airline_name'];?>
+                          </label>
+                        </div>
+                      <?php endwhile; ?>
+                    </div>
+                </div>
+                -->
+
                 <div class="col-12">
                   <div class="form-group">
                       <label for="title" class="text-label">Description</label>
@@ -72,7 +77,7 @@
                   </div>
                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                  <button type="submit" class="btn btn-primary" name="add_airport" value="add_airport">Submit</button>
                   <button type="reset" class="btn btn-secondary">Reset</button>
                 </div>
               </form><!-- End floating Labels Form -->
@@ -86,20 +91,7 @@
 <?php
     include ('includes/footer.php');
 
-    if(isset($_POST['submit'])){
-      
-        $airport_name = $_POST['airport_name'];
-        $iata_code = $_POST['iata_code'];
-        $city = $_POST['city'];
-        $image = $_FILES['image'];
-        $airport_description = $_POST['airport_description'];
-      
-          mysqli_query($con, "INSERT INTO airports (airport_name, iata_code, city, airport_description)
-          VALUES('$airport_name', '$iata_code', '$city', '$airport_description')");
-          move_uploaded_file($tempName, $folder);
-          echo "<script>alert('Airport successfully added!'); window.location='airport.php'</script>";
-
-      }
+    
       
     
 ?>

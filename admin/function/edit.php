@@ -1,6 +1,6 @@
 <?php 
-    include ('database/dbcon.php');
-
+    include ('../database/dbcon.php');
+     #User Profile Edit
     if(isset($_POST['edit_profile'])){
         $user_id = $_POST['user_id'];
         $fullName = $_POST['fullName'];
@@ -10,9 +10,10 @@
         
         mysqli_query($con, "UPDATE users SET name = '$fullName', address = '$address', contact = '$contact', email = '$email'
                             WHERE user_id = '$user_id'");
-                        echo "<script>window.location='user_profile.php?msg=success'</script>";
+                        echo "<script>window.location='../user_profile.php?msg=success'</script>";
     }
 
+    #User Password Edit
     if(isset($_POST['edit_password'])){
         
         $user_id = $_POST['user_id'];
@@ -26,15 +27,16 @@
         }
         else{
             if($new_password != $confirm_password){
-                echo "<script>window.location='user_profile.php?msg=invalid_pass_confirm'</script>";
+                echo "<script>window.location='../user_profile.php?msg=invalid_pass_confirm'</script>";
             }else{       
                 mysqli_query($con," UPDATE users SET password='$new_password', 
                 confirm_password='$confirm_password' WHERE user_id = '$user_id' ");
-                echo "<script>window.location='user_profile.php?msg=success_pass'</script>";
+                echo "<script>window.location='../user_profile.php?msg=success_pass'</script>";
             }
             }
         }
 
+        #Airline Details Edit
     if(isset($_POST['edit_airline'])){
         $airline_id = $_POST['airline_id'];
         $airline_name = $_POST['airline_name'];
@@ -45,9 +47,10 @@
         mysqli_query($con, "UPDATE airlines SET airline_name = '$airline_name', iata_code = '$iata_code', icao_code = '$icao_code', airline_description = '$airline_description'
                                 WHERE airline_id = '$airline_id'");
                             
-                echo "<script>window.location='airline.php?msg=edit'</script>";
+                echo "<script>window.location='../airline.php?msg=edit'</script>";
         }
     
+        #Airport Details Edit
     if(isset($_POST['edit_airport'])){
         $airport_id = $_POST['airport_id'];
         $airport_name = $_POST['airport_name'];
@@ -60,6 +63,6 @@
         
         mysqli_query($con, "UPDATE airports SET airport_name = '$airport_name', iata_code = '$iata_code', city = '$city', airport_description = '$airport_description'
                                 WHERE airport_id = '$airport_id'");
-        echo "<script>window.location='airport.php?msg=edit'</script>";
+        echo "<script>window.location='../airport.php?msg=edit'</script>";
         }
 ?>

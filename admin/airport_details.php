@@ -48,13 +48,18 @@
                     </div>
                 </div>
             </div>
-
+            <!-- 
             <div class="card-footer">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Airlines</h5>
                     </div>
                     <div class="row">
+                        <?php 
+                            $airline = mysqli_query($con, "SELECT airline_id FROM airports WHERE airport_id = '$id'");
+                            while($row = mysqli_fetch_column($airline)){
+                            }
+                        ?>
                         <div class="col-lg-3">
                             <div class="card">
                                 <img src="assets/img/pal.png" class="card-img-top" alt="...">
@@ -63,9 +68,11 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
+                    
                 </div>
-            </div>
+            </div> -->
       </div>
     </section>
 

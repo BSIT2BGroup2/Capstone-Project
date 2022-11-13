@@ -123,7 +123,7 @@
             <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
               <!-- Profile Edit Form -->
-              <form action="edit.php" method="post">
+              <form action="function/edit.php" method="post">
 
                 <input type="text" name="user_id" value="<?php echo $row['user_id']; ?>" hidden>
 
@@ -177,7 +177,7 @@
             <div class="tab-pane fade profile-edit-password pt-3" id="profile-edit-password">
 
               <!-- Profile Edit Form -->
-              <form action="edit.php" method="post">
+              <form action="function/edit.php" method="post">
 
                 <input type="text" name="user_id" value="<?php echo $row['user_id']; ?>" hidden>
                 <input type="text" name="pass" value="<?php echo $row['password']; ?>" hidden>
