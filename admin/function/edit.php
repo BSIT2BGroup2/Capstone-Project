@@ -3,12 +3,14 @@
      #User Profile Edit
     if(isset($_POST['edit_profile'])){
         $user_id = $_POST['user_id'];
-        $fullName = $_POST['fullName'];
+        $first_name = $_POST['first_name'];
+        $middle_name = $_POST['middle_name'];
+        $last_name = $_POST['last_name'];
         $address = $_POST['address'];
         $contact = $_POST['contact'];
         $email = $_POST['email'];
         
-        mysqli_query($con, "UPDATE users SET name = '$fullName', address = '$address', contact = '$contact', email = '$email'
+        mysqli_query($con, "UPDATE users SET first_name = '$first_name', middle_name = '$middle_name', last_name = '$last_name', address = '$address', contact = '$contact', email = '$email'
                             WHERE user_id = '$user_id'");
                         echo "<script>window.location='../user_profile.php?msg=success'</script>";
     }

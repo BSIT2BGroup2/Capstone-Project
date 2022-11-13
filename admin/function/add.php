@@ -44,5 +44,19 @@
                         echo "<script>alert('Airline successfully added!'); window.location='airline.php'</script>";
     }
 
+    if(isset($_POST['add_user'])){
+      $account_id = $_POST['account_id'];
+      $first_name = $_POST['first_name'];
+      $middle_name = $_POST['middle_name'];
+      $last_name = $_POST['last_name'];
+      $address = $_POST['address'];
+      $contact = $_POST['contact'];
+      $email = $_POST['email'];
+      $user_type = "Student";
 
+      mysqli_query($con, "INSERT INTO users (account_id, first_name, middle_name, last_name, address, contact, email, user_type, password, confirm_password)
+                    VALUES ('$account_id','$first_name','$middle_name','$last_name','$address','$contact','$email','$user_type','$account_id','$account_id')");
+            echo "<script>window.location='../student.php?msg=success'</script>";
+                    
+    }
 ?>

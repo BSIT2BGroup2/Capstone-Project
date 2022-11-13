@@ -7,8 +7,23 @@
 
 <main id="main" class="main">
 
+<?php 
+
+  if(isset($_GET['msg'])){
+    if($_GET['msg'] == 'success'){
+      echo '
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-octagon me-1"></i>
+          The Student is been Added
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>';
+    }
+  }
+
+?>
+
     <div class="pagetitle">
-      <h1>Manage Students</h1>
+      <h1>Manage Students <a href="add_student.php" class="btn btn-primary"><i class="bi bi-plus"></i>Add Student</a> </h1>
       <!--<nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -41,7 +56,7 @@
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
-                      <a href="student_profile.php<?php echo '?user_id='.$row['user_id'];?>"><h5 class="card-title"><?php echo $row['name']; ?></h5></a>
+                      <a href="student_profile.php<?php echo '?user_id='.$row['user_id'];?>"><h5 class="card-title"><?php echo $row['first_name']." ". $row['middle_name']." ".$row['last_name'];?></h5></a>
                       <p class="card-text"><?php echo $row['account_id']; ?> <br> <?php echo $row['user_type']; ?> </p>
                     </div>
                   </div>

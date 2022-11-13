@@ -65,7 +65,7 @@
         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
           <img src="assets/img/no-profile.jpg" alt="Profile" class="rounded-circle">
-          <h2><?php echo $row['name'];?></h2>
+          <h2><?php echo $row['first_name']." ". $row['middle_name']." ".$row['last_name'];?></h2>
           <h3><?php echo $row['user_type'];?></h3>
         </div>
       </div>
@@ -100,7 +100,7 @@
 
               <div class="row">
                 <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                <div class="col-lg-9 col-md-8"><?php echo $row['name'];?></div>
+                <div class="col-lg-9 col-md-8"><?php echo $row['first_name']." ". $row['middle_name']." ".$row['last_name'];?></div>
               </div>
 
               <div class="row">
@@ -140,9 +140,23 @@
                 </div> -->
 
                 <div class="row mb-3">
-                  <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
+                  <label for="firstName" class="col-md-4 col-lg-3 col-form-label">First Name</label>
                   <div class="col-md-8 col-lg-9">
-                    <input name="fullName" type="text" class="form-control" id="fullName" value="<?php echo $row['name'];?>">
+                    <input name="first_name" type="text" class="form-control" id="firstName" value="<?php echo $row['first_name'];?>">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="middleName" class="col-md-4 col-lg-3 col-form-label">Middle Name</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="middle_name" type="text" class="form-control" id="middleName" value="<?php echo $row['middle_name'];?>">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="lastName" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="last_name" type="text" class="form-control" id="lastName" value="<?php echo $row['last_name'];?>">
                   </div>
                 </div>
 

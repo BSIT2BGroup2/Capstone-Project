@@ -26,7 +26,7 @@
           <?php else: ?>
             <img src="assets/img/no-profile.jpg" alt="Profile" class="rounded-circle">
           <?php endif; ?>
-          <h2><?php echo $row['name']; ?></h2>
+          <h2><?php echo $row['first_name']." ". $row['middle_name']." ".$row['last_name'];?></h2>
           <h3><?php echo $row['user_type']; ?></h3>
         </div>
       </div>
@@ -50,7 +50,7 @@
 
               <div class="row">
                 <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                <div class="col-lg-9 col-md-8"><?php echo $row['name']; ?></div>
+                <div class="col-lg-9 col-md-8"><?php echo $row['first_name']." ". $row['middle_name']." ".$row['last_name'];?></div>
               </div>
 
               <div class="row">
@@ -59,12 +59,12 @@
               </div>
 
               <div class="row">
-                <div class="col-lg-3 col-md-4 label">Phone</div>
+                <div class="col-lg-3 col-md-4 label">Contact Number</div>
                 <div class="col-lg-9 col-md-8">+63<?php echo $row['contact']; ?></div>
               </div>
 
               <div class="row">
-                <div class="col-lg-3 col-md-4 label">Email</div>
+                <div class="col-lg-3 col-md-4 label">E-mail Address</div>
                 <div class="col-lg-9 col-md-8"><?php echo $row['email']; ?></div>
               </div>
 
