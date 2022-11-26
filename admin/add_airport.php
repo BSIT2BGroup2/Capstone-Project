@@ -22,7 +22,7 @@
       <div class="row align-items-top">
         <div class="card">
           <div class="row"><!-- Floating Labels Form -->
-              <form class="row g-3 needs-validation" novalidate action="function/add.php" method="post">
+              <form class="row g-3 needs-validation" novalidate action="function/add.php" method="post"  enctype="multipart/form-data">
                 <div class="col-md-12">
                   <div class="form-floating">
                     <input type="text" class="form-control" id="floatingName" name="airport_name" placeholder="Airport Name" required>
@@ -46,7 +46,7 @@
                 <div class="col-12">
                   <label for="inputNumber" class="col-sm-2 col-form-label">Airport Picture</label>
                     <div class="col-sm-12">
-                      <input class="form-control" type="file" name="image">
+                      <input class="form-control" type="file" id="form-file" name="image">
                     </div>
                 </div>
                 <!--

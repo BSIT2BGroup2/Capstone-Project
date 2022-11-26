@@ -45,7 +45,7 @@
           echo '
           <div class="alert alert-success alert-dismissible fade show" role="alert">
             <i class="bi bi-exclamation-octagon me-1"></i>
-              Error on Image
+              Error on Uploading Image
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>';
         }
@@ -76,7 +76,7 @@
             <div class="col-lg-3">
               <div class="card">
                 <?php if($row['airport_img'] != null):?>
-                  <img src="assets/img/<?php echo $row['airport_img']; ?>" class="card-img-top" alt="...">
+                  <img src="assets/airport_img/<?php echo $row['airport_img']; ?>" class="card-img-top" alt="...">
                   <?php else:?>
                     <img src="assets/img/no-img.jpg" class="card-img-top" alt="...">
                   <?php endif;?>

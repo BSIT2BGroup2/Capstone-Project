@@ -27,7 +27,7 @@
       <div class="row align-items-top">
         <div class="card">
           <div class="row"><!-- Floating Labels Form -->
-              <form class="row g-3 needs-validation" novalidate action="function/edit.php" method="post">
+              <form class="row g-3 needs-validation" novalidate action="function/edit.php" method="post"  enctype="multipart/form-data">
                 <input type="text" name="airport_id" value="<?php echo $row['airport_id']; ?>" hidden>
                 <div class="col-md-12">
                   <div class="form-floating">
@@ -63,13 +63,13 @@
                         <?php  endwhile; ?>
                       </select>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-12">
                   <label for="inputNumber" class="col-sm-2 col-form-label">Airport Picture</label>
                     <div class="col-sm-12">
-                      <input class="form-control" type="file" id="formFile"  name="airport_img" value="<?php echo $row['airport_img']; ?>">
+                      <input class="form-control" type="file" id="formFile"  name="image" value="<?php echo $row['airport_img']; ?>">
                     </div>
-                  </div> -->
+                  </div>
                 <div class="col-12">
                   <div class="form-group">
                       <label for="title" class="text-label">Description</label>

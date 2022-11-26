@@ -25,6 +25,30 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>';
         }
+        if($_GET['msg'] == 'no_img'){
+          echo '
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-octagon me-1"></i>
+              The Airline is been Added but no Image
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }
+        if($_GET['msg'] == 'img_success'){
+          echo '
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-octagon me-1"></i>
+              The Airline is been Added
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }
+        if($_GET['msg'] == 'img_err'){
+          echo '
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-octagon me-1"></i>
+              Error on Uploading Image
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }
       } 
     ?>
 
