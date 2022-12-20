@@ -1,286 +1,399 @@
-<?php 
-    include('admin/database/dbcon.php');
-
-    $month = date('m');
-$day = date('d');
-$year = date('Y');
-
-$today = $year . '-' . $month . '-' . $day;
-?>
-
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="en">
 
 <head>
+	<meta charset="utf-8">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+	<!--====== Title ======-->
+	<title>Flight Booking System</title>
 
-    <title>Flight Booking Training System</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+	<!--====== Animate CSS ======-->
+	<link rel="stylesheet" href="assets/css/animate.css">
 
-    <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    
+	<!--====== Tiny slider CSS ======-->
+	<link rel="stylesheet" href="assets/css/tiny-slider.css">
+
+	<!--====== glightbox CSS ======-->
+	<link rel="stylesheet" href="assets/css/glightbox.min.css">
+
+	<!--====== Line Icons CSS ======-->
+	<link rel="stylesheet" href="assets/css/LineIcons.2.0.css">
+
+	<!--====== Selectr CSS ======-->
+	<link rel="stylesheet" href="assets/css/selectr.css">
+
+	<!--====== Nouislider CSS ======-->
+	<link rel="stylesheet" href="assets/css/nouislider.css">
+
+	<!--====== Bootstrap CSS ======-->
+	<link rel="stylesheet" href="assets/css/bootstrap-5.0.5-alpha.min.css">
+
+	<!--====== Style CSS ======-->
+	<link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 
-<body id="page-top">
+<body>
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-        <div id="content-wrapper" class="d-flex flex-column">
-            <div id="content">
+<?php include ('database/dbcon.php'); ?>
 
-                <!-- Navbar -->
-                <nav class="navbar navbar-light main-bar">
-                    <div class="row">
-                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                        <span>
-                            <h4>Flight Booking Training System</h4>
-                        </span>
-                    </div>
-                </nav>
-                
-                <nav class="navbar navbar-light form-bar">
-                    <div class="container-fluid">
-                        <div class="rower">
-                        <div class="row align-items-start">
-                            <div class="col">
-                                        <form action="" method="post">
-                                            <div class="row flight-type">
-                                                <div class="col-1">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="flight_type" id="flexRadioDefault1" value="return" onclick="document.getElementById('return_date').hidden = false; document.getElementById('return_date_label').style.display = 'initial';" checked>
-                                                        <label class="form-label" for="flexRadioDefault1">
-                                                          Return
-                                                        </label>
-                                                      </div>
-                                                </div>
-                                                <div class="col-2">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="flight_type" id="flexRadioDefault1" value="one_way" 
-                                                        onclick="document.getElementById('return_date').hidden = true; document.getElementById('return_date_label').style.display = 'none';">
-                                                        <label class="form-label" for="flexRadioDefault1">
-                                                        One-Way
-                                                        </label>
-                                                      </div>
-                                                </div>
-                                            </div>
-                                            <div class="row rower1">
-                                                <div class="col columns">
-                                                    <div class="form-group flight">
-                                                        <span class="form-label">Flying from</span>
-                                                        <input class="form-control form-control-sm" list="location" id="input" name="origin" required>
-                                                        <datalist id="location">
-                                                            <?php 
-                                                                $airport = mysqli_query($con, "SELECT * FROM airports");
-                                                                while($row = mysqli_fetch_array($airport)):
-                                                            ?>
-                                                                <option value="<?php echo $row['iata_code']; ?>"><?php echo $row['airport_name']. ' - '. $row['city']; ?></option>
-                                                            <?php endwhile; ?>
-                                                        </datalist>
-                                                    </div>
-                                                </div>
-                                                <div class="col columns">
-                                                    <div class="form-group flight">
-                                                        <span class="form-label">Flyning to</span>
-                                                        <input class="form-control form-control-sm" list="location" id="input" name="destination" required>
-                                                        <datalist id="location">
-                                                            <?php 
-                                                                $airport = mysqli_query($con, "SELECT * FROM airports");
-                                                                while($row = mysqli_fetch_array($airport)):
-                                                            ?>
-                                                                <option value="<?php echo $row['iata_code']; ?>"><?php echo $row['airport_name']. '-'. $row['country_name']; ?></option>
-                                                            <?php endwhile; ?>
-                                                        </datalist>
-                                                    </div>
-                                                </div>
-                                                <div class="col columns">
-                                                    <div class="form-group dates">
-                                                        <span class="form-label">Departing</span>
-                                                        <input class="form-control form-control-sm" type="date" name="departing_date" value="<?php echo $today; ?>" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col columns dates">
-                                                    <div class="form-group">
-                                                        <span class="form-label" id="return_date_label">Returning</span>
-                                                        <input class="form-control form-control-sm" type="date" name="return_date" id="return_date">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row rower2">
-                                                <div class="col">
-                                                    <div class="form-group flight-type">
-                                                        <span class="form-label">Travel Class</span>
-                                                        <select class="form-control form-control-sm" name="travel_class" required>
-                                                            <option>Economy class</option>
-                                                            <option>Business class</option>
-                                                            <option>First class</option>
-                                                        </select>
-                                                        <span class="select-arrow"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <span class="form-label">Adults <sub> (18+ years old)</sub></span>
-                                                        <input class="form-control form-control-sm" type="number" name="adult" placeholder="1" min="1" value="1" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <span class="form-label">Children <sub>(2 - 12 years old)</sub></span>
-                                                        <input class="form-control form-control-sm" type="number" name="child" placeholder="0" min="0" value="0">
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <span class="form-label">Infant <sub>(2 - 12 months)</sub></span>
-                                                        <input class="form-control form-control-sm" type="number" name="infant" placeholder="0" min="0" value="0">
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <button class="form-control form-control-sm submit-btn btn" type="submit" name="submit">Search</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
+	<!--====== PRELOADER PART START ======-->
+
+	<div class="preloader">
+		<div class="loader">
+			<div class="ytp-spinner">
+				<div class="ytp-spinner-container">
+					<div class="ytp-spinner-rotator">
+						<div class="ytp-spinner-left">
+							<div class="ytp-spinner-circle"></div>
+						</div>
+						<div class="ytp-spinner-right">
+							<div class="ytp-spinner-circle"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--====== PRELOADER PART ENDS ======-->
+
+	<!--====== HEADER PART START ======-->
+
+	<header class="header_area">
+		<div id="header_navbar" class="header_navbar">
+			<div class="container position-relative">
+				<div class="row align-items-center">
+					<div class="col-xl-12">
+						<nav class="navbar navbar-expand-lg">
+							<!-- <a class="navbar-brand" href="index.html">
+								<img id="logo" src="assets/images/logo/logo.svg" alt="Logo">
+							</a> -->
+						</nav> <!-- navbar -->
+					</div>
+				</div> <!-- row -->
+			</div> <!-- container -->
+		</div> <!-- header navbar -->
+	</header>
+
+	<!--====== HEADER PART ENDS ======-->
+
+	<!--====== HERO PART START ======-->
+	<section id="home" class="hero-area bg_cover">
+		<div class="container">
+			<div class="row">
+				<div class="mx-auto col-lg-9 col-xl-9 col-md-10">
+					<div class="text-center hero-content">
+						<h1 class="mb-30 wow fadeInUp" data-wow-delay=".2s">Flight Booking Ticket</h1>
+						<p class="wow fadeInUp" data-wow-delay=".4s">Training System For Tourism Major at LSPU - Sta Cruz Campus</p></br>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--====== HERO PART END ======-->
+
+	<!--====== SEARCH PART START ======-->
+	<div class="search-area">
+		<div class="container">
+			<div class="search-wrapper">
+				<form action="first_book.php">
+                    <div class="row justify-content-left">
+                        <div class="col-lg-3 col-sm-5 col-10">
+                            <div class="search-input">
+                                <label for="round" style="clear: none;">Round Trip</label>
+                                <input type="radio" style="height:1.5em; width:50%;" name="flight_type" value="round" id="round"
+                                onclick="document.getElementById('return_date').disabled = false; document.getElementById('return_date_label').style.display = 'initial';" 
+                                checked>
                             </div>
                         </div>
+                        <div class="col-lg-3 col-sm-5 col-10">
+                            <div class="search-input">
+                                <label for="one-way" style="clear: none;">One-way Trip</label>
+                                <input type="radio" style="height:1.5em; width:50%;" name="flight_type" value="one-way" id="one-way"
+                                onclick="document.getElementById('return_date').disabled = true; document.getElementById('return_date_label').style.display = 'none';">
+                            </div>
                         </div>
                     </div>
-                </nav>
-                <!-- Navbar End-->
-
-                
-            <?php 
-                if(!isset($_POST['submit'])){
-            ?>
-                <main>
-                    <div class="container">
-                        <h2>Flight Search</h2>
-                        <p>To start search enter Flying from and Flying to destinations.</p>
-                    </div>
-                    <?php 
-                    }else{
-                        
-                        $origin = $_POST['origin'];
-                        $destination = $_POST['destination'];
-                        $departing_date = $_POST['departing_date'];
-                        $return_date = $_POST['return_date'];
-                        $adult = $_POST['adult'];
-                        $child = $_POST['child'];
-                        $infant = $_POST['infant'];
-                        $flight_type = $_POST['flight_type'];
-                        $travel_class = $_POST['travel_class'];
-
-                        $ori = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM airports WHERE iata_code ='$origin'"));
-                        $dest = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM airports WHERE iata_code ='$destination'"));
-
-                    ?>
-                    <div class="container">
-                        <h2>Flights Found</h2>
-                        <form action="form.php" method="POST">
-                            <div class="table-responsive">
-                                <div class="card">
-                                    <div class="card-body">
-                                            <table>
-                                                <thead>
-                                                    <tr>
-                                                        <th>Departure</th>
-                                                        <th colspan="3" class="text-center"><?php echo $departing_date; ?></th>
-                                                    </tr>
-                                                </thead>    
-                                                <tbody>
-                                                    <td class="air text-break">Philippine Airline</td>
-                                                    <div class="time">
-                                                        <td class="text-right"><span class="text"><strong><?php echo $origin. ', 10:00'; ?></strong></span><br><p><?php echo $ori['airport_name'].", ". $ori['city'];?></p></td>
-                                                        <td class="text-center"><?php echo '1h30m'; ?></td>
-                                                        <td class="text-left"><span class="text"><strong><?php echo $destination. ', 11:30'; ?></strong></span><br><p><?php echo $dest['city']; ?></p></td>
-                                                    </div>
-                                                        <td>
-                                                            <div class="form-group">
-                                                                <button class="form-control form-control-sm submit-btn btn" type="submit" name="book">Book</button>
-                                                            </div></td>
-                                                </tbody>
-                                                <?php if($return_date != null): 
-                                                ?>
-                                                <thead>
-                                                    <tr>
-                                                        <th>Return</th>
-                                                        <th colspan="3" class="text-center"><?php echo $return_date; ?></th>
-                                                    </tr>
-                                                </thead>    
-                                                <tbody>
-                                                    <td class="air text-break">Philippine Airline</td>
-                                                    <div class="time">
-                                                        <td class="text-right"><span class="text"><strong><?php echo $destination. ', 13:30'; ?></strong></span><br><p><?php echo $dest['airport_name'].", ". $dest['city'];?></p></p></td>
-                                                        <td class="text-center"><?php echo '1h30m'; ?></td>
-                                                        <td class="text-left"><span class="text"><strong><strong><?php echo $origin. ', 14:00'; ?></strong></span><br><p><?php echo $ori['city']; ?></p></td>
-                                                    </div>
-                                                </tbody>
-                                                <?php endif; ?>
-                                            </table>
-                                    </div>
-                                </div>
+					<div class="row justify-content-left">
+						<div class="col-lg-3 col-sm-5 col-10">
+							<label>Flying From</label>
+							<div class="search-input">
+								<label for="flying_from"><i class="lni lni-plane theme-color"></i></label>
+								<select name="flying_from" id="flying_from">
+									<option value="none" selected disabled></option>
+                                    <?php 
+                                        $query = mysqli_query($con, "SELECT * FROM airports");
+                                        while ($o_airport = mysqli_fetch_array($query)):
+                                    ?>
+									    <option value="<?php echo $o_airport['iata_code']; ?>"><?php echo $o_airport['city']. " - " .$o_airport['iata_code'];?></option>
+                                    <?php endwhile; ?>
+                                </select>
+							</div>
+						</div>
+						<div class="col-lg-3 col-sm-5 col-10">
+							<label>Flying To</label>
+							<div class="search-input">
+								<label for="flying_to"><i class="lni lni-plane theme-color"></i></label>
+								<select name="flying_to" id="flying_to">
+									<option value="none" selected disabled></option>
+                                    <?php 
+                                        $query = mysqli_query($con, "SELECT * FROM airports");
+                                        while ($d_airport = mysqli_fetch_array($query)):
+                                    ?>
+									    <option value="<?php echo $d_airport['iata_code']; ?>"><?php echo $d_airport['city']. " - " .$d_airport['iata_code'];?></option>
+                                    <?php endwhile; ?>
+								</select>
+								
+							</div>
+						</div>
+						<div class="col-lg-3 col-sm-5 col-10">
+							<label>Departing Date</label>
+							<div class="search-input">
+								<label for="departing_date"></label>
+								<input type="date" name="departing_date" id="departing_date">
+							</div>
+						</div>
+                        <div class="col-lg-3 col-sm-5 col-10">
+							<label>Return Date</label>
+                            <div class="search-input">
+								<label for="return_date" id="return_date_label"></label>
+								<input type="date" name="return_date" id="return_date">
                             </div>
-                            
-                            <input type="text" name="origin" value="<?php echo $origin;?>" hidden>
-                            <input type="text" name="destination" value="<?php echo $destination;?>" hidden>
-                            <input type="date" name="departing_date" value="<?php echo $departing_date;?>" hidden>
-                            <input type="date" name="return_date" value="<?php echo $return_date;?>" hidden>
-                            <input type="number" name="adult" value="<?php echo $adult;?>" hidden>
-                            <input type="number" name="child" value="<?php echo $child;?>" hidden>
-                            <input type="number" name="infant" value="<?php echo $infant;?>" hidden>
-                            <input type="text" name="flight_type" value="<?php echo $flight_type;?>" hidden>
-                            <input type="text" name="travel_class" value="<?php echo $travel_class;?>" hidden>
-                        </form>
+                        </div>
+                        <div class="col-lg-3 col-sm-5 col-10">
+							<label>Travel Class</label>
+                            <div class="search-input">
+                                <label for="travel_class"></label>
+                                <select name="travel_class" id="travel_class">
+                                    <option value="" selected disabled></option>
+                                    <option value="economy">Economy Class</option>
+                                    <option value="business">Business Class</option>
+                                    <option value="first">First Class</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-5 col-10">
+							<label>Adult (12+ yr old)</label>
+                            <div class="search-input">
+                                <label for="adult"><i class="lni lni-person theme-color"></i></label>
+                                <input type="number" name="adult" id="adult">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-5 col-10">
+							<label>Child (2-12 yr old)</label>
+                            <div class="search-input">
+                                <label for="child"><i class="lni lni-person theme-color"></i></label>
+                                <input type="number" name="child" id="child">
+                            </div>
+                        </div>
+						<div class="col-lg-3 col-sm-5 col-10">
+							<div class="search-btn">
+								<button class="main-btn btn-hover">Search <i class="lni lni-search-alt"></i></button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--====== SEARCH PART END ======-->
+
+	<!--====== FEATURE PRODUCT PART START ======-->
+	<section class="feature-product-area bg_cover">
+		<div class="container">
+			<div class="row">
+				<div class="mx-auto col-lg-6 col-md-10">
+					<div class="text-center section-title mb-60">
+						<h2>Best Tourist Attraction at Philippines</h2>
+					</div>
+				</div>
+			</div>
+
+			<div class="product-carousel-wrapper">
+				<div class="row feature-product-carousel">
+				
+					<div class="col-lg-4 col-md-6">
+						<div class="single-product">
+							<div class="product-img">
+								<img src="assets/images/tour_spot/white_beach.jpg" alt="">
+							</div>
+				
+							<div class="product-content">
+								<h3 class="name">White Beach, Boracay</h3>
+							</div>
+						</div>
+					</div>
+				
+					<div class="col-lg-4 col-md-6">
+						<div class="single-product">
+							<div class="product-img">
+								<img src="assets/images/tour_spot/chocolate_hills.jpg" alt="">
+							</div>
+				
+							<div class="product-content">
+								<h3 class="name">Chocolate Hills, Bohol</h3>
+							</div>
+						</div>
+					</div>
+				
+					<div class="col-lg-4 col-md-6">
+						<div class="single-product">
+							<div class="product-img">
+								<img src="assets/images/tour_spot/underground_river.jpg" alt="">
+							</div>
+				
+							<div class="product-content">
+								<h3 class="name">Puerto Princesa Underground River, Palawan</h3>
+							</div>
+						</div>
+					</div>
+				
+					<div class="col-lg-4 col-md-6">
+						<div class="single-product">
+							<div class="product-img">
+								<img src="assets/images/tour_spot/cloud9.jpg" alt="">
+							</div>
+				
+							<div class="product-content">
+								<h3 class="name">Cloud 9, Siargao</h3>
+							</div>
+						</div>
+					</div>
+				
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-product">
+                            <div class="product-img">
+                                <img src="assets/images/tour_spot/bantayan.jpg" alt="">
+                            </div>
+                
+                            <div class="product-content">
+                                <h3 class="name">Cebu’s Beaches and Diving Spots</h3>
+                            </div>
+                        </div>
                     </div>
-                </main>
-            <?php
-                }
-            ?>
+				
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-product">
+                        <div class="product-img">
+                            <img src="assets/images/tour_spot/rice_terraces.jpg" alt="">
+                        </div>
+            
+                        <div class="product-content">
+                            <h3 class="name">Banaue Rice Terraces, Ifugao</h3>
+                        </div>
+                    </div>
+                </div>
+				
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--====== FEATURE PRODUCT PART ENDS ======-->
+
+		<div class="copy-right">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="text-center">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!--====== FOOTER PART ENDS ======-->
+
+	<!--====== BACK TOP TOP PART START ======-->
+	<a href="#" class="back-to-top btn-hover"><i class="lni lni-chevron-up"></i></a>
+	<!--====== BACK TOP TOP PART ENDS ======-->
 
 
-            </div>
-        </div>
-    </div>
-    <!-- End of Page Wrapper -->
+	<!--====== Bootstrap js ======-->
+	<script src="assets/js/bootstrap.bundle-5.0.0.alpha-min.js"></script>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+	<!--====== Tiny slider js ======-->
+	<script src="assets/js/tiny-slider.js"></script>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!--====== wow js ======-->
+	<script src="assets/js/wow.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+	<!--====== glightbox js ======-->
+	<script src="assets/js/glightbox.min.js"></script>
+	
+	<!--====== Selectr js ======-->
+	<script src="assets/js/selectr.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-    <script src="js/script.js"></script>
+	<!--====== Nouislider js ======-->
+	<script src="assets/js/nouislider.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+	<!--====== Main js ======-->
+	<script src="assets/js/main.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+	<script>
+
+		//======== tiny slider for feature-product-carousel
+		tns({
+			slideBy: 'page',
+			autoplay: false,
+			mouseDrag: true,
+			gutter: 20,
+			nav: false,
+			controls: true,
+			controlsPosition: 'bottom',
+			controlsText: [
+				'<span class="prev"><i class="lni lni-chevron-left"></i></span>', 
+				'<span class="next"><i class="lni lni-chevron-right"></i></span>'
+			],
+			container: ".feature-product-carousel",
+			items: 1,
+			center: false,
+			autoplayTimeout: 5000,
+			swipeAngle: false,
+			speed: 400,
+			responsive: {
+				768: {
+					items: 2,
+				},
+
+				992: {
+					items: 2,
+				},
+
+				1200: {
+					items: 3,
+				}
+			}
+		});
+
+		//======== tiny slider for testimonial
+		tns({
+			slideBy: 'page',
+			autoplay: false,
+			mouseDrag: true,
+			gutter: 20,
+			nav: true,
+			controls: false,
+			container: ".testimonial-carousel",
+			items: 1,
+			center: false,
+			autoplayTimeout: 5000,
+			swipeAngle: false,
+			speed: 400,
+			responsive: {
+				768: {
+					items: 2,
+				},
+				1200: {
+					items: 3,
+				}
+			}
+		});
+	</script>
 
 </body>
 
