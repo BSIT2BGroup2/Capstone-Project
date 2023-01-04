@@ -1,8 +1,9 @@
 <?php
     include ('database/dbcon.php');
-    /*$id = $_SESSION['user_id'];
+    include ('includes/session.php');
+    $id = $_SESSION['user_id'];
     $query = mysqli_query($con, "SELECT * FROM users WHERE user_id='$id'");
-    $user = mysqli_fetch_array($query); */
+    $user = mysqli_fetch_array($query); 
     
 ?>
         <!-- Main Sidebar Container -->
@@ -10,7 +11,7 @@
             <!-- Brand Logo -->
             <a href="index.php" class="brand-link">
             <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light">Student<?php /*echo $user['user_type']; */?></span>
+            <span class="brand-text font-weight-light"><?php echo $user['user_type']; ?></span>
             </a>
 
             <!-- Sidebar -->
@@ -21,7 +22,7 @@
                 <img src="dist/images/no-profile.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                <a href="user_profile.php" class="d-block">Clive Saludes<?php /* echo $user['first_name']." ".$user['last_name']; */?></a>
+                <a href="user_profile.php<?php echo '?id='.$id; ?>" class="d-block"><?php echo $user['first_name']." ".$user['last_name']; ?></a>
                 </div>
             </div>
 

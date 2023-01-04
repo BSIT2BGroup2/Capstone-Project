@@ -133,6 +133,7 @@
 				$login = mysqli_query($con, "SELECT * FROM users WHERE account_id='$account_id' AND password='$password'");
 				$row = mysqli_fetch_array($login);
 				if(mysqli_num_rows($login) == 1){
+					session_start();
 					$_SESSION['user_id'] = $row['user_id'];
 					$_SESSION['logged_in'] = true;
 					header('location:users/index.php');
