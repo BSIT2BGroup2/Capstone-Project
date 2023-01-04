@@ -22,7 +22,6 @@
 <!-- jQuery Knob Chart -->
 <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
-<script src="plugins/moment/moment.min.js"></script>
 <script src="plugins/daterangepicker/daterangepicker.js"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
@@ -42,6 +41,7 @@
 <!-- Select2 -->
 <script src="plugins/select2/js/select2.full.min.js"></script>
 <!-- InputMask -->
+<script src="plugins/moment/moment.min.js"></script>
 <script src="plugins/inputmask/jquery.inputmask.min.js"></script>
 <!-- BS-Stepper -->
 <script src="plugins/bs-stepper/js/bs-stepper.min.js"></script>
@@ -58,6 +58,8 @@
 <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
 
 <!-- Page specific script -->
 <script>
@@ -81,11 +83,22 @@
       mode: "htmlmixed",
       theme: "monokai"
     });
+    
+    //Initialize Select2 Elements
+    $('.select2').select2()
 
-    //Date picker
-    $('#reservationdate').datetimepicker({
-        format: 'L'
-    });
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+    //Datemask dd/mm/yyyy
+    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    //Datemask2 mm/dd/yyyy
+    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    //Money Euro
+    $('[data-mask]').inputmask()
+
     //Date picker
     $('#reservationdate').datetimepicker({
         format: 'L'
@@ -94,15 +107,20 @@
     //Date and time picker
     $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
 
-    //Date range picker
-    $('#reservation').daterangepicker()
+     //Date range picker
+     $('#reservationtime').daterangepicker()
     //Date range picker with time picker
     $('#reservationtime').daterangepicker({
       timePicker: true,
       timePickerIncrement: 30,
       locale: {
-        format: 'MM/DD/YYYY hh:mm A'
+        format: 'MM/DD/YYYY hh:mm H'
       }
+    })
+
+    //Timepicker
+    $('#timepicker').datetimepicker({
+      format: 'H'
     })
   })
 </script>

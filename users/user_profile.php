@@ -1,6 +1,4 @@
 <?php include ('includes/header.php');
-        include ('includes/navbar.php');
-        include ('includes/sidebar.php');
         include ('database/dbcon.php');
 
         $query = mysqli_query($con, "SELECT * FROM users WHERE user_id = '$id'");

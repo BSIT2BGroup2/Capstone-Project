@@ -1,6 +1,4 @@
 <?php include ('includes/header.php'); 
-        include ('includes/navbar.php');
-        include ('includes/sidebar.php');
         include ('database/dbcon.php');
         $id = $_GET['airline_id'];
         $query = mysqli_query($con,"SELECT * FROM airlines WHERE airline_id = '$id'");
@@ -59,7 +57,7 @@
                         </div>
                         <div class="col-sm-12">
                             <label for="AirlineDescription">Airline Description</label>
-                            <textarea id="summernote" name=airline_description value="<?php echo $airline['airline_description']; ?>">
+                            <textarea id="summernote" name=airline_description cols="30" rows="2"><?php echo $airline['airline_description']; ?>
                             </textarea>
                         </div>
                         
@@ -99,7 +97,7 @@
       $airline_name = $_POST['airline_name'];
       $iata_code = $_POST['iata_code'];
       $icao_code = $_POST['icao_code'];
-      $airline_description = $_POST['airline_description'];
+      $airline_description = addslashes(htmlentities($_POST['airline_description']));
       if(!empty($_FILES['image']['name'])){
           $airline_img = $_FILES['image']['name'];
           $tempname = $_FILES['image']['tmp_name'];

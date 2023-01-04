@@ -1,4 +1,5 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html class="no-js" lang="en">
 
 <head>
@@ -67,17 +68,79 @@
 		<div id="header_navbar" class="header_navbar">
 			<div class="container position-relative">
 				<div class="row align-items-center">
-					<div class="col-xl-12">
+					<div class="col-xl-10">
 						<nav class="navbar navbar-expand-lg">
 							<!-- <a class="navbar-brand" href="index.html">
 								<img id="logo" src="assets/images/logo/logo.svg" alt="Logo">
 							</a> -->
 						</nav> <!-- navbar -->
 					</div>
+					<div class="col-xl-1">
+						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+					Login
+						</button>
+						</div>
 				</div> <!-- row -->
 			</div> <!-- container -->
 		</div> <!-- header navbar -->
 	</header>
+
+	<!-- Login Modal -->
+	<div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Login</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+			<form action="" method="post" autocomplete="off">
+				<div class="modal-body">
+						<div class="row justify-content-center">
+							<div class="col-lg-12 col-sm-12 col-12">
+								<div class="search-input">
+									<label for="account_id">ID Number</label>
+									<input type="text" name="account_id" id="account_id" placeholder="Enter Your ID Number" required>
+								</div>
+							</div>
+							<div class="col-lg-12 col-sm-12 col-12">
+								<div class="search-input">
+									<label for="password">Password</label>
+									<input type="password" name="password" id="password" placeholder="Enter Your Password" required>
+								</div>
+							</div>
+						</div>
+				</div>
+				<div class="modal-footer justify-content-between">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="submit" name="login" value="login" class="btn btn-primary">Sign In</button>
+				</div>
+			</form>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+	  	<?php
+
+			if(isset($_POST['login'])){
+			$account_id = $_POST['account_id'];
+			$password = $_POST['password'];
+
+				$login = mysqli_query($con, "SELECT * FROM users WHERE account_id='$account_id' AND password='$password'");
+				$row = mysqli_fetch_array($login);
+				if(mysqli_num_rows($login) == 1){
+					$_SESSION['user_id'] = $row['user_id'];
+					$_SESSION['logged_in'] = true;
+					header('location:users/index.php');
+				}else{
+					header('location:index.php');
+				}
+			}
+		?>
 
 	<!--====== HEADER PART ENDS ======-->
 
@@ -101,13 +164,13 @@
 	<div class="search-area">
 		<div class="container">
 			<div class="search-wrapper">
-				<form action="first_book.php">
+				<form action="first_book.php" method="post">
                     <div class="row justify-content-left">
                         <div class="col-lg-3 col-sm-5 col-10">
                             <div class="search-input">
                                 <label for="round" style="clear: none;">Round Trip</label>
                                 <input type="radio" style="height:1.5em; width:50%;" name="flight_type" value="round" id="round"
-                                onclick="document.getElementById('return_date').disabled = false; document.getElementById('return_date_label').style.display = 'initial';" 
+                                onclick="document.getElementById('return_date').hidden = false; document.getElementById('return_date_label').style.display = 'none';" 
                                 checked>
                             </div>
                         </div>
@@ -115,7 +178,7 @@
                             <div class="search-input">
                                 <label for="one-way" style="clear: none;">One-way Trip</label>
                                 <input type="radio" style="height:1.5em; width:50%;" name="flight_type" value="one-way" id="one-way"
-                                onclick="document.getElementById('return_date').disabled = true; document.getElementById('return_date_label').style.display = 'none';">
+                                onclick="document.getElementById('return_date').hidden = true; document.getElementById('return_date_label').style.display = 'block';">
                             </div>
                         </div>
                     </div>
@@ -124,13 +187,13 @@
 							<label>Flying From</label>
 							<div class="search-input">
 								<label for="flying_from"><i class="lni lni-plane theme-color"></i></label>
-								<select name="flying_from" id="flying_from">
-									<option value="none" selected disabled></option>
+								<select name="flying_from" id="flying_from" required>
+									<option value="none" selected disabled>Flying From</option>
                                     <?php 
                                         $query = mysqli_query($con, "SELECT * FROM airports");
                                         while ($o_airport = mysqli_fetch_array($query)):
                                     ?>
-									    <option value="<?php echo $o_airport['iata_code']; ?>"><?php echo $o_airport['city']. " - " .$o_airport['iata_code'];?></option>
+									    <option value="<?php echo $o_airport['airport_id']; ?>"><?php echo $o_airport['city']. " - " .$o_airport['iata_code'];?></option>
                                     <?php endwhile; ?>
                                 </select>
 							</div>
@@ -139,13 +202,13 @@
 							<label>Flying To</label>
 							<div class="search-input">
 								<label for="flying_to"><i class="lni lni-plane theme-color"></i></label>
-								<select name="flying_to" id="flying_to">
-									<option value="none" selected disabled></option>
+								<select name="flying_to" id="flying_to" required>
+									<option value="none" selected disabled>Flying To</option>
                                     <?php 
                                         $query = mysqli_query($con, "SELECT * FROM airports");
                                         while ($d_airport = mysqli_fetch_array($query)):
                                     ?>
-									    <option value="<?php echo $d_airport['iata_code']; ?>"><?php echo $d_airport['city']. " - " .$d_airport['iata_code'];?></option>
+									    <option value="<?php echo $d_airport['airport_id']; ?>"><?php echo $d_airport['city']. " - " .$d_airport['iata_code'];?></option>
                                     <?php endwhile; ?>
 								</select>
 								
@@ -155,7 +218,7 @@
 							<label>Departing Date</label>
 							<div class="search-input">
 								<label for="departing_date"></label>
-								<input type="date" name="departing_date" id="departing_date">
+								<input type="date" name="departing_date" id="departing_date" required>
 							</div>
 						</div>
                         <div class="col-lg-3 col-sm-5 col-10">
@@ -169,8 +232,8 @@
 							<label>Travel Class</label>
                             <div class="search-input">
                                 <label for="travel_class"></label>
-                                <select name="travel_class" id="travel_class">
-                                    <option value="" selected disabled></option>
+                                <select name="travel_class" id="travel_class" required>
+                                    <option value="" selected disabled>Travel Class</option>
                                     <option value="economy">Economy Class</option>
                                     <option value="business">Business Class</option>
                                     <option value="first">First Class</option>
@@ -181,19 +244,19 @@
 							<label>Adult (12+ yr old)</label>
                             <div class="search-input">
                                 <label for="adult"><i class="lni lni-person theme-color"></i></label>
-                                <input type="number" name="adult" id="adult">
+                                <input type="number" name="adult" id="adult" value="1" min="1" required>
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-5 col-10">
 							<label>Child (2-12 yr old)</label>
                             <div class="search-input">
                                 <label for="child"><i class="lni lni-person theme-color"></i></label>
-                                <input type="number" name="child" id="child">
+                                <input type="number" name="child" id="child" placeholder="0" min="0" required>
                             </div>
                         </div>
 						<div class="col-lg-3 col-sm-5 col-10">
 							<div class="search-btn">
-								<button class="main-btn btn-hover">Search <i class="lni lni-search-alt"></i></button>
+								<button class="main-btn btn-hover" type="submit" name="submit" value="submit">Search <i class="lni lni-search-alt"></i></button>
 							</div>
 						</div>
 					</div>
@@ -333,6 +396,9 @@
 
 	<!--====== Main js ======-->
 	<script src="assets/js/main.js"></script>
+	
+<!-- Bootstrap 4 -->
+<script src="users/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<script>
 

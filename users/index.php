@@ -1,111 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Flight Ticket Booking</title>
+<?php include ('includes/header.php'); 
+    include ('database/dbcon.php');
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
-</head>
-<body class="hold-transition login-page">
-<div class="login-box">
-      <?php
-            if(isset($_GET['msg'])):
-              echo '
-                      <div class="card-default>
-                        <div class="card-body>';
-                            if($_GET['msg'] == 'invalid')
-                            echo '<div class="callout callout-warning">
-                              <h5>
-                              Invalid ID Number or Password!</h5>
-                            </div>';if($_GET['msg'] == 'logout')
-                            echo '<div class="callout callout-success">
-                              <h5>
-                              Successfully Logged Out</h5>
-                            </div>';
-              echo  '   </div>
-                      </div>'; 
-            endif;
-            ?>
-  <!-- /.login-logo -->
-  <div class="card card-outline card-primary">
-    <div class="card-header text-center">
-      <a href="index.php" class="h4">Flight Booking Ticket System</a>
-    </div>
-    <div class="card-body">
-      <p class="login-box-msg">Login Form</p>
+    $airports = mysqli_fetch_array(mysqli_query($con, "SELECT COUNT(*) AS total FROM airports"));
+    $airlines = mysqli_fetch_array(mysqli_query($con, "SELECT COUNT(*) AS total FROM airlines"));
+    $students = mysqli_fetch_array(mysqli_query($con, "SELECT COUNT(*) AS total FROM users WHERE user_type = 'Student'"));
+        ?>
 
 
-      <form action="" method="post">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" name="account_id" placeholder="ID Number" required>
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Dashboard</h1>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
             </div>
-          </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Users Box -->
+                    <div class="row">
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-success">
+                                <div class="inner">
+                                    <h3><?php echo $students['total']; ?></h3>
+
+                                    <p>Users</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-primary">
+                            <div class="inner">
+                                    <h3><?php echo $airports['total']; ?></h3>
+
+                                <p>Airports</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                            </div>
+                        </div>
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-primary">
+                            <div class="inner">
+                                    <h3><?php echo $airlines['total']; ?></h3>
+
+                                <p>Airlines</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                            </div>
+                        </div>
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>70</h3>
+
+                                <p>Book Ticket</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-ticket"></i>
+                            </div>
+                            </div>
+                        </div>
+                    <!-- ./col -->
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
         </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" name="password" placeholder="Password" required>
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block" name="submit" value="submit">Sign In</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
 
-      <p class="mb-1">
-        <a href="#">I forgot my password</a>
-      </p>
-    </div>
-    <!-- /.card-body -->
-  </div>
-  <!-- /.card -->
-</div>
-<!-- /.login-box -->
-
-<?php
-
-include ('database/dbcon.php');
-/*
-if(isset($_POST['submit'])){
-  $account_id = $_POST['account_id'];
-  $password = $_POST['password'];
-
-  $login = mysqli_query($con, "SELECT * FROM users WHERE account_id='$account_id' AND password='$password'");
-  $count = mysqli_num_rows($login);
-  $row = mysqli_fetch_array($login);
-  if($count > 0){
-    $_SESSION['user_id'] = $row['user_id'];
-    echo "<script>window.location='dashboard.php'</script>";
-  }else{
-    echo "<script>window.location='index.php?msg=invalid'</script>";
-  }
-}*/
-?>
-
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
-</body>
-</html>
+<?php include ('includes/footer.php');?>

@@ -1,6 +1,4 @@
 <?php include ('includes/header.php'); 
-        include ('includes/navbar.php');
-        include ('includes/sidebar.php');
         include ('database/dbcon.php');
         $id = $_GET['airport_id'];
         $query = mysqli_query($con, "SELECT * FROM airports WHERE airport_id = '$id'");
@@ -59,7 +57,7 @@
                         </div>
                         <div class="col-sm-12">
                             <label for="airportDescription">Airport Description</label>
-                            <textarea id="summernote" name=airport_description  value="<?php echo $airport['airport_description']; ?>">
+                            <textarea id="summernote" name=airport_description cols="30" rows="2" ><?php echo $airport['airport_description']; ?>
                             </textarea>
                         </div>
                         
@@ -96,7 +94,7 @@
       $airport_name = $_POST['airport_name'];
       $iata_code = $_POST['iata_code'];
       $city = $_POST['city'];
-      $airport_description = $_POST['airport_description'];
+      $airport_description = addslashes(htmlentities($_POST['airport_description']));
       if(!empty($_FILES['image']['name'])){
           $airport_img = $_FILES['image']['name'];
           $tempname = $_FILES['image']['tmp_name'];

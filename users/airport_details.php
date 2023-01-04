@@ -1,6 +1,4 @@
 <?php include ('includes/header.php'); 
-        include ('includes/navbar.php');
-        include ('includes/sidebar.php');
         include ('database/dbcon.php');
 
         $id = $_GET['airport_id'];
@@ -36,7 +34,7 @@
           <?php else: ?>
             <img src="dist/images/no-img.jpg" alt="" class="card-img-center" style="width: 40%; height: 40%;">
           <?php endif; ?>
-          <p><?php echo $airport['airport_description']; ?></p>
+          <p><?php echo stripslashes(html_entity_decode($airport['airport_description'])); ?></p>
         </div>
         <div class="card-body">
             

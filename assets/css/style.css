@@ -171,7 +171,7 @@ textarea {
 
 input::placeholder,
 textarea::placeholder {
-  opacity: 1;
+  opacity: 5;
 }
 
 input:focus,
@@ -1841,7 +1841,7 @@ hero area css
   width: 100%;
   background: #fff;
   border-radius: 30px;
-  border: 1px solid rgba(124, 134, 154, 0.25);
+  border: 1px solid rgb(124, 134, 154);
   padding: 0 25px;
   height: 55px;
   margin: 10px 0;

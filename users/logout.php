@@ -1,13 +1,11 @@
 <?php
-include('database/dbcon.php');
-include('includes/session.php');
-
-$logout_query=mysqli_query($con,"select * from users where user_id='$id'");
-$row=mysqli_fetch_array($logout_query);
-$user=$row['name'];
+// Initialize the session
 session_start();
+ 
+// Destroy the session.
 session_destroy();
-
-header('location:index.php?msg=logout');
-
+ 
+// Redirect to login page
+header("location: ../index.php");
+exit;
 ?>

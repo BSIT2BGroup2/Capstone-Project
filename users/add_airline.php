@@ -1,6 +1,4 @@
-<?php include ('includes/header.php'); 
-        include ('includes/navbar.php');
-        include ('includes/sidebar.php');
+<?php include ('includes/header.php');
     ?>
 
   <!-- Content Wrapper. Contains page content -->
@@ -55,7 +53,7 @@
                         </div>
                         <div class="col-sm-12">
                             <label for="AirlineDescription">Airline Description</label>
-                            <textarea id="summernote" name=airline_description>
+                            <textarea id="summernote" name=airline_description cols="30" rows="2">
                             </textarea>
                         </div>
                         
@@ -95,7 +93,7 @@
       $airline_name = $_POST['airline_name'];
       $iata_code = $_POST['iata_code'];
       $icao_code = $_POST['icao_code'];
-      $airline_description = $_POST['airline_description'];
+      $airport_description = addslashes(htmlentities($_POST['airline_description']));
       if(!empty($_FILES['image']['name'])){
           $airline_img = $_FILES['image']['name'];
           $tempname = $_FILES['image']['tmp_name'];

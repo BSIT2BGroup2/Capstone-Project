@@ -25,6 +25,7 @@
         $travel_class = $_POST['travel_class'];
         $adult = $_POST['adult'];
         $child = $_POST['child'];
+        $origins = $_POST['origin'];
         $traveller = $adult + $child;
       }
     ?>
@@ -52,15 +53,26 @@
                 <h5 class="nav-link"><?php echo $traveller; ?> Traveller
                 <p>(<?php echo $adult; ?> adult and <?php echo $child; ?> child)</p></h5>
             </div>
-            <!-- <h6 class="nav-header">Departure Flight Details</h6>
+            <?php
+                $origin_query = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM schedule WHERE schedule_id = '$origins'"));
+                $o_airline = $origin_query['airline_id'];
+                $o_origin = $origin_query['origin'];
+                $o_destination = $origin_query['destination'];
+
+                $o_air = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM airlines WHERE airline_id = '$o_airline' "));
+                $o_ori = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM airports WHERE airport_id = '$o_origin' "));
+                $o_dest = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM airports WHERE airport_id = '$o_destination' "));
+            ?>
+            <h6 class="nav-header">Departure Flight Details</h6>
             <p class="nav-link">
-                Date: 01/25/2023 <br>
-                <strong>10:40</strong> Manila (MNL) <br>
-                <strong>12:40</strong> Lapu-Lapu City (CEB) <br>
-                Total Duration: 2h 00m
-                Fare Type: Economy Class
+                Date: <?php echo $origin_query['flight_date']; ?> <br>
+                Airline: <?php echo $o_air['airline_name']; ?> <br>
+                <strong><?php echo $origin_query['flight_time']; ?></strong> <?php echo $o_ori['airport_name']; ?> (<?php echo $o_ori['iata_code']; ?>) <br>
+                <strong>12:00</strong> <?php echo $o_dest['airport_name']; ?> (<?php echo $o_dest['iata_code']; ?>) <br>
+                Total Duration: 2h 00m <br>
+                Fare Type: <?php echo $travel_class; ?> <br>
             </p>
-            <h6 class="nav-header">Return Flight Details</h6>
+            <!-- <h6 class="nav-header">Return Flight Details</h6>
             <p class="nav-link">
                 Date: 01/30/2023 <br>
                 <strong>12:40</strong> Lapu-Lapu City (CEB) <br>
@@ -98,12 +110,12 @@
 				  <table class="table">
 					  <thead>
 						  <tr>
-							  <th colspan="4" class="text-center"><?php echo $departing_date; ?></th>
+							  <th colspan="4" class="text-center"><?php echo $return_date; ?></th>
 						  </tr>
 					  </thead>
 					  <tbody>
               <?php 
-                $query = mysqli_query($con, "SELECT * FROM schedule WHERE origin = '$flying_from' AND destination = '$flying_to' AND flight_date = '$departing_date'");
+                $query = mysqli_query($con, "SELECT * FROM schedule WHERE origin = '$flying_to' AND destination = '$flying_from' AND flight_date = '$return_date'");
                 while ($row = mysqli_fetch_array($query)):
                   $airline = $row['airline_id'];
                   $origin = $row['origin'];
@@ -113,15 +125,10 @@
                   $ori = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM airports WHERE airport_id = '$origin' "));
                   $dest = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM airports WHERE airport_id = '$destination' "));
               ?>
-              <form action="
-                  <?php if($return_date == null){
-                    echo 'form.php';
-                  }else{
-                    echo 'second_book.php';
-                  }?>
-              " method="post">
+              <form action="form.php" method="post">
                 <tr>
-                  <input type="text" name="origin" value="<?php echo $row['schedule_id']; ?>" hidden> 
+                  <input type="text" name="origin" value="<?php echo $origin; ?>" hidden> 
+                  <input type="text" name="destination" value="<?php echo $row['schedule_id']; ?>" hidden>
                   <input type="text" name="flight_type" value="<?php echo $flight_type; ?>" hidden> 
                   <input type="text" name="flying_to" value="<?php echo $flying_to; ?>" hidden> 
                   <input type="text" name="flying_from" value="<?php echo $flying_from; ?>" hidden> 

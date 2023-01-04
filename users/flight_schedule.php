@@ -1,6 +1,5 @@
 <?php include ('includes/header.php');
-        include ('includes/navbar.php');
-        include ('includes/sidebar.php');
+      include ('database/dbcon.php');
     ?>
 
   <!-- Content Wrapper. Contains page content -->
@@ -41,17 +40,29 @@
                   </tr>
                   </thead>
                   <tbody>
+                    <?php 
+                      $sched = mysqli_query($con, "SELECT * FROM schedule");
+                      while($scheds = mysqli_fetch_array($sched)):
+                        $airline = $scheds['airline_id'];
+                        $origin = $scheds['origin'];
+                        $destination = $scheds['destination'];
+
+                        $air = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM airlines WHERE airline_id = '$airline' "));
+                        $ori = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM airports WHERE airport_id = '$origin' "));
+                        $dest = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM airports WHERE airport_id = '$destination' "));
+                    ?>
                     <tr>
-                      <td>1603412874</td>
-                      <td>Philippine Airline</td>
-                      <td>Manila - Ninoy Aquino Internation Airport (MNL)</td>
-                      <td>Cebu - Mactan Airport (CEB)</td>
-                      <td>01/25/2023 - 12:00</td>
+                      <td><?php echo $scheds['schedule_id']; ?></td>
+                      <td><?php echo $air['airline_name'];?></td>
+                      <td><?php echo $ori['city']; ?> - <?php echo $ori['airport_name']; ?> (<?php echo $ori['iata_code']; ?>)</td>
+                      <td><?php echo $dest['city']; ?> - <?php echo $dest['airport_name']; ?> (<?php echo $dest['iata_code']; ?>)</td>
+                      <td><?php echo $scheds['flight_date']. " - " .$scheds['flight_time']; ?></td>
                       
                       <td class="project-state">
-                          <span class="badge badge-success">Scheduled</span>
+                          <span class="badge badge-success"><?php echo $scheds['statused']; ?></span>
                       </td>
                     </tr>
+                      <?php endwhile; ?>
                   </tbody>
                   <tfoot>
                   <tr>
